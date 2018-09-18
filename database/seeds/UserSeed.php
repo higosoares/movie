@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Database\Seeder;
+
 /**
  * Created by PhpStorm.
  * User: HIGO
@@ -6,7 +9,7 @@
  * Time: 20:25
  */
 
-class UserSeed
+class UserSeed extends Seeder
 {
     /**
      * Seed the application's database.

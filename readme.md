@@ -12,7 +12,8 @@
 Movie é uma aplicação web de catálogo de filmes a partir do framework Laravel versão 5.6.37 e PHP 7.2.8.
 
 ## Uso
-
+Crie no PgAdmin um banco chamado movie e em seguida rode o comando : php artisan migrate --seed
+que irá criar as tabelas e popular o banco.
 Na pasta raiz utilize o comando : php artisan serve
 
 

@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Database\Seeder;
+
 /**
  * Created by PhpStorm.
  * User: HIGO
@@ -6,7 +9,7 @@
  * Time: 20:25
  */
 
-class CategorySeed
+class CategorySeed extends Seeder
 {
     /**
      * Seed the application's database.
@@ -17,7 +20,7 @@ class CategorySeed
     {
         DB::table('tb_category')->insert(
             [
-                'id_user' => 1,
+                'id_category' => 1,
                 'tx_name_category' => 'Ação',
                 'created_at' => new \DateTime()
             ]
@@ -25,7 +28,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 2,
+                'id_category' => 2,
                 'tx_name_category' => 'Anime',
                 'created_at' => new \DateTime()
             ]
@@ -33,7 +36,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 3,
+                'id_category' => 3,
                 'tx_name_category' => 'Clássicos',
                 'created_at' => new \DateTime()
             ]
@@ -41,7 +44,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 4,
+                'id_category' => 4,
                 'tx_name_category' => 'Comédia stand-up',
                 'created_at' => new \DateTime()
             ]
@@ -49,7 +52,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 5,
+                'id_category' => 5,
                 'tx_name_category' => 'Comédias',
                 'created_at' => new \DateTime()
             ]
@@ -57,7 +60,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 6,
+                'id_category' => 6,
                 'tx_name_category' => 'Documentários',
                 'created_at' => new \DateTime()
             ]
@@ -65,7 +68,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 7,
+                'id_category' => 7,
                 'tx_name_category' => 'Dramas',
                 'created_at' => new \DateTime()
             ]
@@ -73,7 +76,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 8,
+                'id_category' => 8,
                 'tx_name_category' => 'Esportes',
                 'created_at' => new \DateTime()
             ]
@@ -81,7 +84,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 9,
+                'id_category' => 9,
                 'tx_name_category' => 'Estrangeiros',
                 'created_at' => new \DateTime()
             ]
@@ -89,7 +92,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 10,
+                'id_category' => 10,
                 'tx_name_category' => 'Fé e espiritualidade',
                 'created_at' => new \DateTime()
             ]
@@ -97,7 +100,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 11,
+                'id_category' => 11,
                 'tx_name_category' => 'Ficcção científica e fantasia',
                 'created_at' => new \DateTime()
             ]
@@ -105,7 +108,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 12,
+                'id_category' => 12,
                 'tx_name_category' => 'Filmes Brasileiros',
                 'created_at' => new \DateTime()
             ]
@@ -113,7 +116,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 13,
+                'id_category' => 13,
                 'tx_name_category' => 'Independentes',
                 'created_at' => new \DateTime()
             ]
@@ -121,7 +124,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 14,
+                'id_category' => 14,
                 'tx_name_category' => 'Infantins e para a família',
                 'created_at' => new \DateTime()
             ]
@@ -129,7 +132,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 15,
+                'id_category' => 15,
                 'tx_name_category' => 'Música e musicais',
                 'created_at' => new \DateTime()
             ]
@@ -137,7 +140,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 16,
+                'id_category' => 16,
                 'tx_name_category' => 'Policiais',
                 'created_at' => new \DateTime()
             ]
@@ -145,7 +148,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 17,
+                'id_category' => 17,
                 'tx_name_category' => 'Premiados',
                 'created_at' => new \DateTime()
             ]
@@ -153,7 +156,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 18,
+                'id_category' => 18,
                 'tx_name_category' => 'Romances',
                 'created_at' => new \DateTime()
             ]
@@ -161,7 +164,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 19,
+                'id_category' => 19,
                 'tx_name_category' => 'Suspense',
                 'created_at' => new \DateTime()
             ]
@@ -169,7 +172,7 @@ class CategorySeed
 
         DB::table('tb_category')->insert(
             [
-                'id_user' => 20,
+                'id_category' => 20,
                 'tx_name_category' => 'Terror',
                 'created_at' => new \DateTime()
             ]

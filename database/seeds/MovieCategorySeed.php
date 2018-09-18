@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Database\Seeder;
+
 /**
  * Created by PhpStorm.
  * User: HIGO
@@ -6,7 +9,7 @@
  * Time: 20:25
  */
 
-class MovieCategorySeed
+class MovieCategorySeed extends Seeder
 {
     /**
      * Seed the application's database.
@@ -15,7 +18,7 @@ class MovieCategorySeed
      */
     public function run()
     {
-        DB::table('tb_movie_category')->insert(
+        DB::table('ta_movie_category')->insert(
             [
                 'id_movie' => 1,
                 'id_category' => 1,
@@ -23,7 +26,7 @@ class MovieCategorySeed
             ]
         );
 
-        DB::table('tb_movie_category')->insert(
+        DB::table('ta_movie_category')->insert(
             [
                 'id_movie' => 1,
                 'id_category' => 11,
@@ -31,7 +34,7 @@ class MovieCategorySeed
             ]
         );
 
-        DB::table('tb_movie_category')->insert(
+        DB::table('ta_movie_category')->insert(
             [
                 'id_movie' => 2,
                 'id_category' => 20,
