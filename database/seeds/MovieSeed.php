@@ -28,6 +28,7 @@ class MovieSeed extends Seeder
                 'qt_debut_movie' => '2018-09-06',
                 'qt_year_movie' => '2018',
                 'tp_situation_movie' => 1,
+                'tx_url_imagem_movie' => 'img/the_nun.jpg',
                 'created_at' => new \DateTime()
             ]
         );
@@ -42,6 +43,7 @@ class MovieSeed extends Seeder
                 'qt_debut_movie' => '2018-09-13',
                 'qt_year_movie' => '2018',
                 'tp_situation_movie' => 1,
+                'tx_url_imagem_movie' => 'img/predador_2018.jpg',
                 'created_at' => new \DateTime()
             ]
         );
