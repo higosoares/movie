@@ -29,6 +29,8 @@ class MovieSeed extends Seeder
                 'qt_year_movie' => '2018',
                 'tp_situation_movie' => 1,
                 'tx_url_imagem_movie' => 'img/the_nun.jpg',
+                'tx_url_trailer_movie' => 'https://www.youtube.com/watch?v=deayNzQLqAg',
+                'qt_star_rating_movie' => 5.7,
                 'created_at' => new \DateTime()
             ]
         );
@@ -44,6 +46,8 @@ class MovieSeed extends Seeder
                 'qt_year_movie' => '2018',
                 'tp_situation_movie' => 1,
                 'tx_url_imagem_movie' => 'img/predador_2018.jpg',
+                'tx_url_trailer_movie' => 'https://www.youtube.com/watch?v=c2MKYixgjj0',
+                'qt_star_rating_movie' => 5.9,
                 'created_at' => new \DateTime()
             ]
         );
