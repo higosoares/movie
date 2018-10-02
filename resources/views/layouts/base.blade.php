@@ -19,27 +19,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             window.scrollTo(0, 1);
         } </script>
     <!-- //for-mobile-apps -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link rel="stylesheet" href="css/contactstyle.css" type="text/css" media="all"/>
-    <link rel="stylesheet" href="css/faqstyle.css" type="text/css" media="all"/>
-    <link href="css/single.css" rel='stylesheet' type='text/css'/>
-    <link href="css/medile.css" rel='stylesheet' type='text/css'/>
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{{ asset('css/style.css') }} " rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/contactstyle.css') }} " type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/faqstyle.css') }}" type="text/css" media="all"/>
+    <link href="{{ asset('css/single.css') }} " rel='stylesheet' type='text/css'/>
+    <link href="{{ asset('css/medile.css') }} " rel='stylesheet' type='text/css'/>
     <!-- banner-slider -->
-    <link href="css/jquery.slidey.min.css" rel="stylesheet">
+    <link href="{{ asset('css/jquery.slidey.min.css') }} " rel="stylesheet">
     <!-- //banner-slider -->
     <!-- pop-up -->
-    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{{ asset('css/popuo-box.css') }} " rel="stylesheet" type="text/css" media="all"/>
     <!-- //pop-up -->
     <!-- font-awesome icons -->
-    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }} "/>
     <!-- //font-awesome icons -->
     <!-- js -->
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }} "></script>
     <!-- //js -->
     <!-- banner-bottom-plugin -->
-    <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
-    <script src="js/owl.carousel.js"></script>
+    <link href="{{ asset('css/owl.carousel.css') }} " rel="stylesheet" type="text/css" media="all">
+    <script src="{{ asset('js/owl.carousel.js') }} "></script>
     <script>
         $(document).ready(function () {
             $("#owl-demo").owlCarousel({
@@ -58,8 +58,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300'
           rel='stylesheet' type='text/css'>
     <!-- start-smoth-scrolling -->
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript" src="{{ asset('js/move-top.js') }} "></script>
+    <script type="text/javascript" src="{{ asset('js/easing.js') }}  "></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -76,7 +76,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">
     <div class="container">
         <div class="w3layouts_logo">
-            <a href="index.html"><h1>One<span>Movies</span></h1></a>
+            <a href="index.html"><h1>Movies<span>Entertainment</span></h1></a>
         </div>
         <div class="w3_search">
             <form action="#" method="post">
@@ -253,7 +253,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!-- //footer -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         $(".dropdown").hover(

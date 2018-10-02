@@ -16,9 +16,6 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'tx_name_user' ,
-        'tx_email_user' ,
-        'tx_password_user',
-        'tp_situation_user'
+        'tx_name_category'
     ];
 }

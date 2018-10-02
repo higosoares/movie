@@ -25,6 +25,9 @@ class Movie extends Model
         'qt_debut_movie',
         'qt_year_movie',
         'tp_situation_movie',
+        'tx_url_imagem_movie',
+        'tx_url_trailer_movie',
+        'qt_star_rating_movie',
     ];
 
     public function category(): BelongsTo
