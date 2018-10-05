@@ -30,7 +30,12 @@ class MovieController extends Controller
     }
 
 
-    public function cadastrar()
+    public function register()
+    {
+
+    }
+
+    public function list()
     {
 
     }
@@ -41,13 +46,13 @@ class MovieController extends Controller
     }
 
 
-    public function editar()
+    public function edit()
     {
 
     }
 
 
-    public function excluir()
+    public function delete()
     {
 
     }

@@ -6,12 +6,12 @@
  * Time: 17:42
  */
 
-namespace App\Repositories\Category;
+namespace App\Repositories\Movie;
 
 
 use App\Interfaces\GenericInterface;
 
-class CategoryRepository implements GenericInterface
+class MovieRepository implements GenericInterface
 {
     public function register($params)
     {

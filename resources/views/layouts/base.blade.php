@@ -11,6 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="application/x-javascript"> addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -111,7 +112,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                             <div class="form">
                                 <h3>Login to your account</h3>
-                                <form action="#" method="post">
+                                <form action="{{ url('/login') }}" method="post">
+                                    {{ csrf_field() }}
                                     <input type="text" name="tx_email_user" placeholder="Email" required="true">
                                     <input type="password" name="tx_password_user" placeholder="Password"
                                            required="true">
@@ -120,7 +122,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                             <div class="form">
                                 <h3>Create an account</h3>
-                                <form action="#" method="post">
+                                <form action="{{ url('/register') }}" method="post" method="POST">
+                                    {{ csrf_field() }}
                                     <input type="text" name="tx_name_user" placeholder="Name" required="">
                                     <input type="email" name="tx_email_user" placeholder="Email Address"
                                            required="true">
@@ -173,35 +176,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
                             <ul class="dropdown-menu multi-column columns-3">
                                 <li>
+                                    @inject('categorys', 'App\Models\Category')
                                     <div class="col-sm-4">
                                         <ul class="multi-column-dropdown">
-                                            <li><a href="genres.html">Action</a></li>
-                                            <li><a href="genres.html">Biography</a></li>
-                                            <li><a href="genres.html">Crime</a></li>
-                                            <li><a href="genres.html">Family</a></li>
-                                            <li><a href="horror.html">Horror</a></li>
-                                            <li><a href="genres.html">Romance</a></li>
-                                            <li><a href="genres.html">Sports</a></li>
-                                            <li><a href="genres.html">War</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <li><a href="genres.html">Adventure</a></li>
-                                            <li><a href="comedy.html">Comedy</a></li>
-                                            <li><a href="genres.html">Documentary</a></li>
-                                            <li><a href="genres.html">Fantasy</a></li>
-                                            <li><a href="genres.html">Thriller</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <li><a href="genres.html">Animation</a></li>
-                                            <li><a href="genres.html">Costume</a></li>
-                                            <li><a href="genres.html">Drama</a></li>
-                                            <li><a href="genres.html">History</a></li>
-                                            <li><a href="genres.html">Musical</a></li>
-                                            <li><a href="genres.html">Psychological</a></li>
+                                            @foreach($categorys->get() as $category)
+                                                @if (($loop->index % 10 == 0 ) && $loop->index != 0)
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                @else
+                                                    <li><a href="/category/{{ $category->id_category }}">{{ $category->tx_name_category }}</a></li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="clearfix"></div>

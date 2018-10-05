@@ -12,12 +12,14 @@ namespace App\Interfaces;
 interface GenericInterface
 {
     
-    public function cadastrar($params);
+    public function register($params);
 
-    public function editar($id);
+    public function edit($id, $params);
 
-    public function excluir($id);
+    public function delete($id);
 
-    public function listar();
+    public function list();
+
+    public function retrieve($id);
 
 }

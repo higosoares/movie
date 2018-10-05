@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -28,12 +31,42 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * @var userService
      *
+     */
+    protected $userService;
+
+    /**
+     * Create a new controller instance.
      * @return void
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function tx_email_user()
+    {
+        return 'tx_email_user';
+    }
+
+    public function tx_password_user()
+    {
+        return 'tx_password_user';
+    }
+
+    /**
+     * Validate user registered
+     * @param Request $request
+     * @return void
+     */
+    public function checkLogin(Request $request)
+    {
+        $params = new \stdClass();
+        $params->tx_email_user = $request->input('tx_email_user');
+        $params->tx_password_user = $request->input('tx_password_user');
+
+        $user = $this->userService->list($params);
+
     }
 }

@@ -34,7 +34,7 @@ class CategoryController extends Controller
     }
 
 
-    public function cadastrar()
+    public function register()
     {
 
     }
@@ -44,14 +44,19 @@ class CategoryController extends Controller
 
     }
 
-
-    public function editar()
+    public function list()
     {
 
     }
 
 
-    public function excluir()
+    public function edit()
+    {
+
+    }
+
+
+    public function delete()
     {
 
     }

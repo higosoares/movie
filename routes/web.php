@@ -12,4 +12,10 @@
 */
 
 Route::get('/', 'Home\HomeController@index');
+//Route::post('/checkLogin', 'Auth\LoginController@checkLogin');
+//Route::post('/register', 'Auth\UserController@register');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
