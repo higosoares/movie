@@ -45,15 +45,24 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function tx_email_user()
+    public function username()
     {
         return 'tx_email_user';
     }
 
-    public function tx_password_user()
+    public function validateLogin(Request $request)
     {
-        return 'tx_password_user';
+        $this->validate($request, [
+            $this->username() => 'required|string',
+            'tx_password_user' => 'required|string',
+        ]);
     }
+
+    public function credentials(Request $request)
+    {
+        return $request->only($this->username(), 'tx_password_user');
+    }
+
 
     /**
      * Validate user registered

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Created by PhpStorm.
@@ -23,7 +24,7 @@ class UserSeed extends Seeder
                 'id_user' => 1,
                 'tx_name_user' => 'Higo Soares do Lago',
                 'tx_email_user' => 'higo@gmail.com',
-                'tx_password_user' => bcrypt('123456'),
+                'tx_password_user' => Hash::make('123456'),
                 'tp_situation_user' => 1,
                 'created_at' => new \DateTime()
             ]

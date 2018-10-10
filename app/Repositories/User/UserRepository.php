@@ -11,6 +11,7 @@ namespace App\Repositories\User;
 
 use App\Interfaces\GenericInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements GenericInterface
 {
@@ -25,7 +26,7 @@ class UserRepository implements GenericInterface
         $entity = new User([
             'tx_name_user' => $params->tx_name_user,
             'tx_email_user' => $params->tx_email_user,
-            'tx_password_user' => $params->tx_password_user,
+            'tx_password_user' => Hash::make($params->tx_password_user),
         ]);
         $entity->save();
         $entity->refresh();
@@ -43,7 +44,7 @@ class UserRepository implements GenericInterface
         $entity->fill([
         'tx_name_user' => $params->tx_name_user,
         'tx_email_user' => $params->tx_email_user,
-        'tx_password_user' => bcrypt($params->tx_password_user),
+        'tx_password_user' => Hash::make($params->tx_password_user),
         ]);
         $entity->save();
         $entity->refresh();
@@ -75,11 +76,7 @@ class UserRepository implements GenericInterface
         }
 
         if (isset($params->tx_email_user)) {
-            if (isset($params->tx_password_user)) {
-                $query->where(['tx_email_user'=> $params->tx_email_user, 'tx_password_user' => bcrypt($params->tx_password_user)]);
-            } else {
-                $query->where('tx_email_user', $params->tx_email_user);
-            }
+            $query->where('tx_email_user', $params->tx_email_user);
         }
 
         if (isset($params->tx_name_user)) {
