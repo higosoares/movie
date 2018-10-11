@@ -10,11 +10,13 @@ namespace App\Http\Controllers\User;
 
 use App\Exceptions\MovieException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Services\User\UserService;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -24,10 +26,17 @@ class UserController extends Controller
      */
     protected $userService;
 
-    public function __construct(Container $container)
+    public function __construct(UserService $userService)
     {
-        $this->middleware('guest');
-        $this->userService = $container->make(UserService::class);
+        $this->middleware('auth');
+        $this->userService = $userService;
+
+    }
+
+    public function index()
+    {
+        $users = $this->userService->list();
+        return response()->json($users);
 
     }
 
@@ -47,10 +56,6 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        $acesso = $this->verificarAcesso();
-        if ($acesso) {
-            return $acesso;
-        }
         DB::beginTransaction();
         try {
             $params = new \stdClass();
@@ -81,12 +86,7 @@ class UserController extends Controller
      */
     public function editForm($id)
     {
-        $acesso = $this->verificarAcesso('html');
-        if ($acesso) {
-            return $acesso;
-        }
-
-        $user = $this->userService->recuperarPorId((int) $id);
+        $user = $this->userService->retrieveById((int) $id);
 
         return view('user.edit')->with([
             'user' => $user,
@@ -96,15 +96,11 @@ class UserController extends Controller
     /**
      * Edit user
      * @param int $id
-     * @param Request $request
+     * @param UserRequest $request
      * @return Response
      */
-    public function edit($id, Request $request)
+    public function edit($id, UserRequest $request)
     {
-        $acesso = $this->verificarAcesso();
-        if ($acesso) {
-            return $acesso;
-        }
         DB::beginTransaction();
         try {
             $params = new \stdClass();
@@ -112,7 +108,7 @@ class UserController extends Controller
             $params->tx_email_user = $request->input('tx_email_user');
             $params->tx_password_user = $request->input('tx_password_user');
 
-            $user = $this->userService->edit($request->input('id'), $params);
+            $user = $this->userService->edit($id, $params);
             $retorno = [
                 'status' => 200,
                 'resultado' => $user
@@ -135,10 +131,6 @@ class UserController extends Controller
      */
     public function delete($id)
     {
-        $acesso = $this->verificarAcesso();
-        if ($acesso) {
-            return $acesso;
-        }
         try {
             $this->userService->delete((int) $id);
             $retorno = [
@@ -152,13 +144,5 @@ class UserController extends Controller
         }
         return response()->json($retorno)->setStatusCode($retorno['status']);
     }
-
-    public function verifyAccess()
-    {
-        if(!Auth::check()){
-            return view('acesso_nao_autorizado');
-        }
-    }
-
 
 }

@@ -21,11 +21,11 @@ class UserSeed extends Seeder
     {
         DB::table('tb_user')->insert(
             [
-                'id_user' => 1,
-                'tx_name_user' => 'Higo Soares do Lago',
-                'tx_email_user' => 'higo@gmail.com',
-                'tx_password_user' => Hash::make('123456'),
-                'tp_situation_user' => 1,
+                'id' => 1,
+                'name' => 'Higo Soares do Lago',
+                'email' => 'higo@gmail.com',
+                'password' => Hash::make('123456'),
+                'situation' => 1,
                 'created_at' => new \DateTime()
             ]
         );

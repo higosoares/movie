@@ -11,11 +11,17 @@
 |
 */
 
-Route::get('/', 'Home\HomeController@index');
-//Route::post('/checkLogin', 'Auth\LoginController@checkLogin');
-//Route::post('/register', 'Auth\UserController@register');
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/home', 'Home\HomeController@index');
+
+Route::group(array('prefix' => 'user'), function() {
+    Route::get('/', 'User\UserController@index');
+    Route::get('/{id}', 'User\UserController@editForm');
+    Route::post('/{id}', 'User\UserController@edit');
+    Route::delete('/{id}', 'User\UserController@delete');
+});
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 

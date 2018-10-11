@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     protected $table = 'tb_user';
 
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +19,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'tx_name_user' ,
-        'tx_email_user' ,
-        'tx_password_user',
-        'tp_situation_user'
+        'name' ,
+        'email' ,
+        'password',
+        'situation',
     ];
 
     /**
@@ -31,6 +31,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'password', 'remember_token',
     ];
 }

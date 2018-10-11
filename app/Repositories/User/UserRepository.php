@@ -12,13 +12,14 @@ namespace App\Repositories\User;
 use App\Interfaces\GenericInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use stdClass;
 
 class UserRepository implements GenericInterface
 {
 
     /**
      * Register new user
-     * @param array $params
+     * @param stdClass $params
      * @return User
      */
     public function register($params)
@@ -35,7 +36,7 @@ class UserRepository implements GenericInterface
 
     /**
      * Edit user
-     * @param array $params
+     * @param stdClass $params
      * @return User
      */
     public function edit($id, $params)
@@ -43,9 +44,13 @@ class UserRepository implements GenericInterface
         $entity = $this->retrieve($id);
         $entity->fill([
         'tx_name_user' => $params->tx_name_user,
-        'tx_email_user' => $params->tx_email_user,
-        'tx_password_user' => Hash::make($params->tx_password_user),
+        'tx_email_user' => $params->tx_email_user
         ]);
+        if ($params->tx_password_user != null){
+            $entity->fill([
+                'tx_password_user' => Hash::make($params->tx_password_user),
+            ]);
+        }
         $entity->save();
         $entity->refresh();
         return $entity;

@@ -1,0 +1,140 @@
+html, body {
+    background-color: #FF8D1B;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #fff;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    background: #FF8D1B;
+    text-align: center;
+    padding: 0 25px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.footer{
+    background: #212121;
+    padding: 4em 0;
+}
+.grid_left p {
+    color: #999;
+    line-height: 1.8em;
+}
+.grid_left p a {
+    color: #fff;
+    text-decoration: none;
+}
+ul, label {
+    margin: 0;
+    padding: 0;
+}
+.grid_right ul li {
+    display: inline-block;
+    margin-left: 2em;
+}
+.grid_right ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.grid_right ul li a:hover {
+    color: #FF8D1B;
+}
+.grid_right {
+    text-align: right;
+}
+#toTop {
+    display: none;
+    text-decoration: none;
+    position: fixed;
+    bottom: 20px;
+    right: 2%;
+    overflow: hidden;
+    z-index: 999;
+    width: 32px;
+    height: 32px;
+    border: none;
+    text-indent: 100%;
+    background: url(../img/arrow1.png) no-repeat 0px 0px;
+}
+#toTopHover {
+    width: 32px;
+    height: 32px;
+    display: block;
+    overflow: hidden;
+    float: right;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+}
+.top-left {
+    position: absolute;
+    left: 50px;
+    top: -10px;
+}
+
+.logo {
+    float: left;
+}
+.logo a {
+    display: block;
+    text-decoration: none;
+}
+.logo a h1 {
+    font-size: 2.8em;
+    color: #212121;
+    text-transform: uppercase;
+
+    padding-right: 1.67em;
+    font-weight: 900;
+    padding-bottom: .3em;
+}
+.logo a h1 span {
+    color: #fff;
+    font-size: .3em;
+    display: block;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-align: right;
+    line-height: 0;
+}

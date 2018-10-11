@@ -8,12 +8,13 @@
 
 namespace App\Services\User;
 
-
 use App\Models\User;
 use App\Repositories\User\UserRepository;
 use App\Services\GenericService;
 use App\Traits\LancadorDeExcecao;
+use App\Validates\User\UserValidate;
 use Illuminate\Container\Container;
+use stdClass;
 
 class UserService extends GenericService
 {
@@ -31,31 +32,28 @@ class UserService extends GenericService
      */
     protected $userService;
 
-    public function __construct(Container $container)
+    /**
+     *
+     * @var UserValidate
+     */
+    protected $userValidate;
+
+    public function __construct(UserRepository $userRepository, UserValidate $userValidate)
     {
-        parent::__construct($container);
-        $this->userRepository = $container->make(UserRepository::class);
-        $this->userService = $container->make(UserService::class);
+        parent::__construct();
+        $this->userRepository = $userRepository;
+        $this->userValidate = $userValidate;
 
     }
 
     /**
      * Register new user
-     * @param array $params
+     * @param stdClass $params
      * @return User
      */
     public function register($params)
     {
-        //$this->programaValidate->validarParametros($params);
-        //$this->programaValidate->validarDataCadastro($params);
-
-        /*$user = new User([
-            'tx_name_user' => $params->tx_name_user,
-            'tx_email_user' => $params->tx_email_user,
-            'tx_password_user' => $params->tx_password_user,
-            'tp_situation_user' => 1
-        ]);
-        */
+        $this->userValidate->validateParameters($params);
         $user = $this->userRepository->register($params);
         return $user;
     }
@@ -64,7 +62,7 @@ class UserService extends GenericService
     /**
      * List users
      * @param \stdClass $params
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return array
      */
     public function list($params = null)
     {
@@ -74,21 +72,13 @@ class UserService extends GenericService
     /**
      * Edit user
      * @param int $id
-     * @param array $params
+     * @param stdClass $params
      * @return User
      */
     public function edit($id, $params)
     {
-        //$this->programaValidate->validarParametros($params);
+        $this->userValidate->validateParameters($params);
         $user = $this->retrieveById((int) $id);
-        //$this->programaValidate->validarDataEdicao($params, $programa);
-
-        /*$user->fill([
-            'tx_name_user' => $params->tx_name_user,
-            'tx_email_user' => $params->tx_email_user,
-            'tx_password_user' => bcrypt($params->tx_password_user),
-        ]);*/
-
         $user = $this->userRepository->edit($user->id_user, $params);
         $user->refresh();
         return $user;
@@ -101,6 +91,7 @@ class UserService extends GenericService
     public function delete($id)
     {
         $user = $this->userRepository->retrieve($id);
+        $this->userValidate->validateUser($user);
         $this->userRepository->delete($user->id_user);
     }
 
@@ -111,9 +102,9 @@ class UserService extends GenericService
      */
     public function retrieveById($id): User
     {
-        //$this->programaValidate->validarInteiro($id);
+        $this->userValidate->validateInteger($id);
         $user = $this->userRepository->retrieve($id);
-        //$this->programaValidate->validarPrograma($programa);
+        $this->userValidate->validateUser($user);
         return $user;
     }
 

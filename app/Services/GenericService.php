@@ -14,8 +14,8 @@ abstract class GenericService
      *
      * @param Container $container
      */
-    public function __construct(Container $container)
+    public function __construct()
     {
-        $this->container =$container;
+        //$this->container =$container;
     }
 }

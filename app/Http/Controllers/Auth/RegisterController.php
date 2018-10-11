@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Services\User\UserService;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -32,12 +31,6 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Where to redirect users after registration.
-     * @var UserService
-     */
-    protected $userService;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -56,9 +49,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'tx_name_user' => 'required|string|max:255',
-            'tx_email_user' => 'required|string|email|max:255|unique:tb_user',
-            'tx_password_user' => 'required|string|min:6|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tb_user',
+            'password' => 'required|string|min:6|max:255|confirmed',
         ]);
     }
 
@@ -70,13 +63,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //return $this->userService->register($data);
-
         return User::create([
-            'tx_name_user' => $data['tx_name_user'],
-            'tx_email_user' => $data['tx_email_user'],
-            'tx_password_user' => Hash::make($data['tx_password_user']),
-            'tp_situation_user' => 1,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'situation' => 1,
         ]);
     }
 }

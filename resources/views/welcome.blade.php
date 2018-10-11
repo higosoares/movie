@@ -4,68 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.png') }}">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Movie') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet" type="text/css" media="all"/>
+        @yield('head')
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
+            <dic class="top-left">
+                <div class="logo">
+                    <a href="index.html"><h1>Movie<span>Entertainment</span></h1></a>
+                </div>
+            </dic>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -78,8 +37,9 @@
             @endif
 
             <div class="content">
+                @section('content')
                 <div class="title m-b-md">
-                    Laravel
+                    Movie
                 </div>
 
                 <div class="links">
@@ -89,7 +49,28 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                @show
             </div>
         </div>
+        <div class="footer">
+            <div class="container">
+                <div class="col-md-5 grid_left">
+                    <p>© 2018 Movie. All rights reserved</p>
+                </div>
+                <div class="col-md-7 grid_right">
+                    <ul>
+                        <li>
+                            <a href="genres.html">Movies</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">About Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
+        @yield('js-files')
     </body>
 </html>

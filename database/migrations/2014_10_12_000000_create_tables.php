@@ -14,11 +14,11 @@ class CreateTables extends Migration
     public function up()
     {
         Schema::create('tb_user', function (Blueprint $table) {
-            $table->increments('id_user');
-            $table->string('tx_name_user', 255);
-            $table->string('tx_email_user', 255)->unique();
-            $table->string('tx_password_user', 255);
-            $table->tinyInteger('tp_situation_user');
+            $table->increments('id');
+            $table->string('name', 255);
+            $table->string('email', 255)->unique();
+            $table->string('password', 255);
+            $table->tinyInteger('situation');
             $table->rememberToken();
             $table->timestamps();
         });

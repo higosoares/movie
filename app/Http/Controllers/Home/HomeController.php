@@ -15,10 +15,21 @@ use App\Models\Movie;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $movies = Movie::all();
         $genres = Category::all();
         return view('home')->with(['movies' => $movies, 'genres' => $genres]);
     }
+
 }
