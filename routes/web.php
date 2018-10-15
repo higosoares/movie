@@ -23,5 +23,16 @@ Route::group(array('prefix' => 'user'), function() {
     Route::delete('/{id}', 'User\UserController@delete');
 });
 
+Route::group(array('prefix' => 'movie'), function() {
+    Route::get('/', 'Movie\MovieController@index');
+    Route::get('/{id}', 'Movie\MovieController@editForm');
+    Route::post('/{id}', 'Movie\MovieController@edit');
+    Route::delete('/{id}', 'Movie\MovieController@delete');
+});
+
+Route::group(array('prefix' => 'category'), function() {
+    Route::get('/', 'Category\CategoryController@index');
+});
+
 Auth::routes();
 

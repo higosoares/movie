@@ -1,19 +1,15 @@
-@extends('layouts.app2')
-
+@extends('welcome')
+@section('head')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" media="all"/>
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <div class="container">
+        <div class="w3_login_module">
+            <div class="module form-module">
+                <div class="toggle"><i class="fa fa-times fa-pencil"></i></div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+                <div class="form">
+                    <h3>{{ __('Reset Password') }}</h3>
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
@@ -31,17 +27,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                         </div>
+
+                        <input type="submit" class="btn btn-primary" value="{{ __('Send Password Reset Link') }}"/>
+
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

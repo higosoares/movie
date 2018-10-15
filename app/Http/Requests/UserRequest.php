@@ -37,14 +37,14 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'tx_name_user.required' => 'Favor informar o nome do usuário',
-            'tx_name_user.max' => 'Tamanho de nome do usuário inválido',
-            'tx_email_user.required' => 'Favor informar o e-mail do usuário',
-            'tx_email_user.email' => 'Tamanho de e-mail do usuário inválido',
-            'tx_email_user.max' => 'Favor informar o e-mail do usuário válido',
-            'tx_email_user.unique' => 'E-mail já existente',
-            'tx_password_user.min' => 'Tamanho de e-mail do usuário inválido',
-            'tx_password_user.max' => 'Tamanho de e-mail do usuário inválido',
+            'name.required' => 'Favor informar o nome do usuário',
+            'name.max' => 'Tamanho de nome do usuário inválido',
+            'email.required' => 'Favor informar o e-mail do usuário',
+            'email.email' => 'Tamanho de e-mail do usuário inválido',
+            'email.max' => 'Favor informar o e-mail do usuário válido',
+            //'email.unique' => 'E-mail já existente',
+            'password.min' => 'Tamanho de e-mail do usuário inválido',
+            'password.max' => 'Tamanho de e-mail do usuário inválido',
 
         ];
     }

@@ -91,21 +91,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="w3l_sign_in_register">
             <ul>
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="display: none;">
+                        <li>
+                            <div class="col-sm-4">
+                                <ul class="multi-column-dropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+                                            {{ __('Logout') }}
+                                        </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>
@@ -145,7 +151,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <nav>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
+                        <li class="active"><a href="/home">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
                             <ul class="dropdown-menu multi-column columns-3">
@@ -181,8 +187,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <ul>
             <li class="w3_twitter"><a href="#">Twitter <i class="fa fa-twitter"></i></a></li>
             <li class="w3_facebook"><a href="#">Facebook <i class="fa fa-facebook"></i></a></li>
-            <li class="w3_dribbble"><a href="#">Dribbble <i class="fa fa-dribbble"></i></a></li>
-            <li class="w3_g_plus"><a href="#">Google+ <i class="fa fa-google-plus"></i></a></li>
+            <li class="w3_g_plus"><a href="#">Google <i class="fa fa-google"></i></a></li>
         </ul>
     </nav>
 </div>

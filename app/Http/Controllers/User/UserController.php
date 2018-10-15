@@ -59,9 +59,9 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_user = $request->input('tx_name_user');
-            $params->tx_email_user = $request->input('tx_email_user');
-            $params->tx_password_user = $request->input('tx_password_user');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
             $user = $this->userService->register($params);
             $retorno = [
@@ -104,9 +104,9 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_user = $request->input('tx_name_user');
-            $params->tx_email_user = $request->input('tx_email_user');
-            $params->tx_password_user = $request->input('tx_password_user');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
             $user = $this->userService->edit($id, $params);
             $retorno = [

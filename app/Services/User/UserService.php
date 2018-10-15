@@ -79,7 +79,7 @@ class UserService extends GenericService
     {
         $this->userValidate->validateParameters($params);
         $user = $this->retrieveById((int) $id);
-        $user = $this->userRepository->edit($user->id_user, $params);
+        $user = $this->userRepository->edit($user->id, $params);
         $user->refresh();
         return $user;
     }
@@ -92,7 +92,7 @@ class UserService extends GenericService
     {
         $user = $this->userRepository->retrieve($id);
         $this->userValidate->validateUser($user);
-        $this->userRepository->delete($user->id_user);
+        $this->userRepository->delete($user->id);
     }
 
     /**

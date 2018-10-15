@@ -25,9 +25,10 @@ class UserRepository implements GenericInterface
     public function register($params)
     {
         $entity = new User([
-            'tx_name_user' => $params->tx_name_user,
-            'tx_email_user' => $params->tx_email_user,
-            'tx_password_user' => Hash::make($params->tx_password_user),
+            'name' => $params->name,
+            'email' => $params->email,
+            'password' => Hash::make($params->password),
+            'situation' => 1,
         ]);
         $entity->save();
         $entity->refresh();
@@ -43,12 +44,12 @@ class UserRepository implements GenericInterface
     {
         $entity = $this->retrieve($id);
         $entity->fill([
-        'tx_name_user' => $params->tx_name_user,
-        'tx_email_user' => $params->tx_email_user
+            'name' => $params->name,
+            'email' => $params->email,
         ]);
-        if ($params->tx_password_user != null){
+        if ($params->password != null){
             $entity->fill([
-                'tx_password_user' => Hash::make($params->tx_password_user),
+                'password' => Hash::make($params->password),
             ]);
         }
         $entity->save();
@@ -64,7 +65,7 @@ class UserRepository implements GenericInterface
     public function delete($id)
     {
         $entity = new User();
-        $entity->tp_situation_user = 0;
+        $entity->situation = 0;
         return $entity->save();
     }
 
@@ -76,21 +77,21 @@ class UserRepository implements GenericInterface
     public function list($params=null)
     {
         $query = User::query();
-        if (isset($params->tp_situation_user)) {
-            $query->where('tp_situation_user', $params->tp_situation_user);
+        if (isset($params->situation)) {
+            $query->where('situation', $params->situation);
         }
 
-        if (isset($params->tx_email_user)) {
-            $query->where('tx_email_user', $params->tx_email_user);
+        if (isset($params->email)) {
+            $query->where('email', $params->email);
         }
 
-        if (isset($params->tx_name_user)) {
-            $text = $params->tx_name_user;
+        if (isset($params->name)) {
+            $text = $params->name;
             $query->where( function ($q2) use ( $text ) {
-                $q2->where( 'tx_name_user', 'ilike', "%$text%" );
+                $q2->where( 'name', 'ilike', "%$text%" );
             });
         }
-        $query->orderBy('tx_name_user');
+        $query->orderBy('name');
         return $query->get();
     }
 

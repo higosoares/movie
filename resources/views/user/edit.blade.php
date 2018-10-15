@@ -7,21 +7,21 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center"  >
-                <form method="post" action="{{ url('user/'.$user->id_user) }}" id="user_edit">
+                <form method="post" action="{{ url('user/'.$user->id) }}" id="user_edit">
                     @csrf
-                        <input type="hidden" name="id_user" value="{{$user->id_user}}">
+                        <input type="hidden" name="id" value="{{$user->id}}">
                         <div class="form-group col-md-4 col-md-offset-4">
-                            <label for="tx_name_user" >Name</label>
+                            <label for="name" >Name</label>
                             <span class="required">*</span>
-                            <input type="text" class="form-control" id="tx_name_user" name="tx_name_user" placeholder="{{ __('Name') }}" value="{{$user->tx_name_user}}" required="">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Name') }}" value="{{$user->name}}" required="">
                         </div>
                         <div class="form-group col-md-4 col-md-offset-4">
-                            <label for="tx_email_user">E-mail</label>
-                            <input type="email" class="form-control" id="tx_email_user" name="tx_email_user" value="{{$user->tx_email_user}}" placeholder="{{ __('you@example.com') }}" required>
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" placeholder="{{ __('you@example.com') }}" required>
                         </div>
                         <div class="form-group col-md-4 col-md-offset-4">
-                            <label for="tx_password_user">New password</label>
-                            <input type="password" class="form-control" id="tx_password_user" name="tx_password_user" value="" placeholder="{{ __('Password') }}">
+                            <label for="password">New password</label>
+                            <input type="password" class="form-control" id="password" name="password" value="" placeholder="{{ __('Password') }}">
                         </div>
                         <div class="form-group col-md-4 col-md-offset-4">
                             <button class="btn btn-primary btn-lg btn-block" type="submit">{{ __('Edit') }}</button>

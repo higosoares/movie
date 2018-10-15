@@ -13,11 +13,7 @@ use Illuminate\Container\Container;
 
 class CategoryController extends Controller
 {
-    /**
-     *
-     * @param Container $container
-     */
-    public function __construct(Container $container)
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -25,7 +21,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-
+        return view('category.index');
     }
 
     public function formularioCadastro()

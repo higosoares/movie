@@ -16,9 +16,9 @@ class UserValidate
     public static function rule()
     {
         return [
-            'tx_name_user' => 'required|string|max:255',
-            'tx_email_user' => 'required|string|email|max:255|unique:tb_user,tx_email_user,{$id},id_user',
-            'tx_password_user' => 'nullable|string|min:6|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255', //unique:tb_user,email,{$id},id
+            'password' => 'nullable|string|min:6|max:255',
         ];
     }
 
@@ -41,14 +41,14 @@ class UserValidate
     public function validateInteger($id)
     {
         if (!is_int($id)) {
-            $this->excecao(['id_user' => ['invalid' => 'User invalid']]);
+            $this->excecao(['id' => ['invalid' => 'User invalid']]);
         }
     }
 
     public function validateUser($user)
     {
         if (!$user) {
-            $this->excecao(['id_user' => ['found' => 'User not found']]);
+            $this->excecao(['id' => ['found' => 'User not found']]);
         }
     }
 }
