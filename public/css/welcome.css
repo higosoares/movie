@@ -1,7 +1,7 @@
 html, body {
     background-color: #FF8D1B;
     color: #636b6f;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 100;
     height: 100vh;
     margin: 0;
@@ -124,7 +124,6 @@ ul, label {
     font-size: 2.8em;
     color: #212121;
     text-transform: uppercase;
-
     padding-right: 1.67em;
     font-weight: 900;
     padding-bottom: .3em;

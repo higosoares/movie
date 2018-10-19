@@ -10,11 +10,11 @@
             <!--/browse-agile-w3ls -->
             <div class="browse-agile-w3ls general-w3ls">
                 <div class="tittle-head">
-                    <h4 class="latest-text">Family Movies </h4>
+                    <h4 class="latest-text">{{ $category->tx_name_category }} Movies </h4>
                     <div class="container">
                         <div class="agileits-single-top">
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="/home">Home</a></li>
                                 <li class="active">Genres</li>
                             </ol>
                         </div>

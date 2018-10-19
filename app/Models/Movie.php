@@ -30,12 +30,9 @@ class Movie extends Model
         'qt_star_rating_movie',
     ];
 
-    public function category(): BelongsTo
+
+    public function roles()
     {
-        return $this->belongsTo(Category::class);
-    }
-    public function movieCategory(): HasMany
-    {
-        return $this->hasMany(MovieCategory::class, 'id_movie');
+        return $this->belongsToMany(Category::class, 'ta_movie_category', 'id_movie', 'id_category');
     }
 }

@@ -14,6 +14,7 @@ use App\Services\Movie\MovieService;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -28,7 +29,13 @@ class MovieController extends Controller
         $this->movieService = $movieService;
     }
 
-    public function index()
+    public function index($id)
+    {
+        $movie = $this->movieService->retrieveById($id);
+        return view('movie.single')->with(['movie' => $movie]);
+    }
+
+    public function listForm()
     {
         return view('movie.index');
     }

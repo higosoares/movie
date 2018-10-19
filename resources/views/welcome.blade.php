@@ -15,6 +15,14 @@
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet" type="text/css" media="all"/>
         @yield('head')
+        <style>
+            .container2{
+                background: url(../img/background.jpg);
+                width: 100%;
+                height: 80%;
+            }
+
+        </style>
 
     </head>
     <body>
@@ -36,19 +44,9 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="container container2">
                 @section('content')
-                <div class="title m-b-md">
-                    Movie
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                    {{--<img src="{{ asset('img/background.jpg') }}"/>--}}
                 @show
             </div>
         </div>
@@ -59,9 +57,6 @@
                 </div>
                 <div class="col-md-7 grid_right">
                     <ul>
-                        <li>
-                            <a href="genres.html">Movies</a>
-                        </li>
                         <li>
                             <a href="contact.html">About Us</a>
                         </li>

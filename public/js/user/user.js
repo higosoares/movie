@@ -28,7 +28,7 @@ var user = {
     delete: function(event) {
         swal({
                 title: "Você tem certeza ?",
-                text: "Você realmente deseja excluir este programa?",
+                text: "Você realmente deseja excluir este usuario?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",

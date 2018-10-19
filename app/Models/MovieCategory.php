@@ -24,13 +24,4 @@ class MovieCategory extends Model
         'id_category',
     ];
 
-    public function movie(): BelongsTo
-    {
-        return $this->belongsTo(Movie::class);
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

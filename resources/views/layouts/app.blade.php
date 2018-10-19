@@ -207,7 +207,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="col-md-7 w3ls_footer_grid1_right">
             <ul>
                 <li>
-                    <a href="genres.html">Movies</a>
+                    <a href="/movie">Movies</a>
                 </li>
                 <li>
                     <a href="contact.html">About Us</a>

@@ -70,7 +70,7 @@ class MovieRepository implements GenericInterface
      */
     public function delete($id)
     {
-        $entity = new Movie();
+        $entity = $this->retrieve($id);
         return $entity->delete();
     }
 

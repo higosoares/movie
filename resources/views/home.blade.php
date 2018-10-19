@@ -796,20 +796,29 @@
                                                 {{ str_limit($movie->tx_description_movie, $limit = 600, $end = '...') }}
                                                 </p>
                                             <p class="fexi_header_para">
-                                                <span>Date of Release<label>:</label></span> {{ date('d-m-Y', strtotime($movie->qt_debut_movie)) }}
+                                                <span>Date of Release<label>:</label></span> {{ date('d/m/Y', strtotime($movie->qt_debut_movie)) }}
                                             </p>
                                             <p class="fexi_header_para">
                                                 <span>Genres<label>:</label> </span>
-                                                <a href="genres.html">Action</a> |
-                                                <a href="genres.html">Adventure</a>
+                                                @foreach($movie->roles as $mov)
+                                                    <a href="/category/{{ $mov->id_category }}">{{ $mov->tx_name_category }}</a>
+                                                    @if((count($movie->roles) > 1) && (!$loop->last))
+                                                        |
+                                                        @endif
+                                                @endforeach
                                             </p>
                                             <p class="fexi_header_para fexi_header_para1">
                                                 <span>Star Rating<label>:</label></span>
-                                                <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                                @foreach(explode('.', $movie->qt_star_rating_movie) as $rating)
+                                                    @for ($i = 0; $i < 5; $i++)
+                                                        @if($rating % 2 == 0)
+                                                            <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                                        @else
+                                                            <a href="#"><i class="fa fa-star-0" aria-hidden="true"></i></a>
+                                                        @endif
+                                                    @endfor
+                                                @endforeach
+
                                             </p>
                                         </div>
                                         <div class="clearfix"></div>
