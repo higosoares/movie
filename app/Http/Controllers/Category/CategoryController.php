@@ -26,17 +26,25 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-
-    public function index($id)
+    /**
+     * Show index page
+     * @return \Illuminate\View\View
+     */
+    public function index()
     {
-        $category = $this->categoryService->retrieveById($id);
-        return view('category.index')->with(['category' => $category]);
+        $catogories = $this->categoryService->list();
+        dd($catogories);
+        return view('category.index')->with(['categories' => $catogories]);
     }
 
-    public function list()
+    /**
+     * Show category page
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
     {
-        $movies = $this->categoryService->list();
-        return response()->json($movies);
+        $category = $this->categoryService->retrieveById($id);
+        return view('category.show')->with(['category' => $category]);
     }
 
     /**
@@ -45,7 +53,7 @@ class CategoryController extends Controller
      */
     public function registerForm()
     {
-        return view('category.register');
+        return view('category.registerForm');
     }
 
     /**
@@ -84,7 +92,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryService->retrieveById((int) $id);
 
-        return view('category.edit')->with([
+        return view('category.editForm')->with([
             'category' => $category,
         ]);
 

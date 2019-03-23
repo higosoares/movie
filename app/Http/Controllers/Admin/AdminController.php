@@ -27,6 +27,10 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * Show index page
+     * @return \Illuminate\View\View
+    */
     public function index()
     {
         $category = $this->categoryService->list();

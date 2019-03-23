@@ -37,6 +37,7 @@ class UserController extends Controller
      * Show index page
      * @return \Illuminate\View\View
     */
+
     public function index()
     {
         $users = $this->userService->list();
@@ -50,11 +51,11 @@ class UserController extends Controller
      */
     public function registerForm()
     {
-        return view('user.registerForm');
+        return view('profile.registerForm');
     }
 
     /**
-     * Register new user
+     * Register new profile
      * @param Request $request
      * @return Response
      */
@@ -92,13 +93,13 @@ class UserController extends Controller
     {
         $user = $this->userService->retrieveById((int) $id);
 
-        return view('user.editForm')->with([
+        return view('user.edit')->with([
             'user' => $user,
         ]);
     }
 
     /**
-     * Edit user
+     * Edit profile
      * @param int $id
      * @param UserRequest $request
      * @return Response
@@ -129,7 +130,7 @@ class UserController extends Controller
     }
 
     /**
-     * Delete user
+     * Delete profile
      * @param $id
      * @return Response
      */

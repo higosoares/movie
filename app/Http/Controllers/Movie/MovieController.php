@@ -29,37 +29,40 @@ class MovieController extends Controller
         $this->movieService = $movieService;
     }
 
-    public function index($id)
-    {
-        $movie = $this->movieService->retrieveById($id);
-        return view('movie.single')->with(['movie' => $movie]);
-    }
-
-    public function listForm()
+    /**
+     * Show index page
+     * @return \Illuminate\View\View
+    */
+    public function index()
     {
         return view('movie.index');
     }
 
-    public function list()
+    /**
+     * Show movie page
+     * @return \Illuminate\View\View
+    */
+    public function show($id)
     {
-        $movies = $this->movieService->list();
-        return response()->json($movies);
+        $movie = $this->movieService->retrieveById($id);
+        return view('movie.show')->with(['movie' => $movie]);
     }
+
 
     /**
      * Show register form
      * @return \Illuminate\View\View
-     */
+    */
     public function registerForm()
     {
-        return view('movie.register');
+        return view('movie.registerForm');
     }
 
     /**
      * Register new movie
      * @param Request $request
      * @return Response
-     */
+    */
     public function register(Request $request)
     {
         DB::beginTransaction();
@@ -95,12 +98,12 @@ class MovieController extends Controller
     /**
      * Show edit form
      * @return \Illuminate\View\View
-     */
+    */
     public function editForm($id)
     {
         $movie = $this->movieService->retrieveById((int) $id);
 
-        return view('movie.edit')->with([
+        return view('movie.editForm')->with([
             'movie' => $movie,
         ]);
 
@@ -111,7 +114,7 @@ class MovieController extends Controller
      * @param int $id
      * @param Request $request
      * @return Response
-     */
+    */
     public function edit($id, Request $request)
     {
         DB::beginTransaction();
@@ -149,7 +152,7 @@ class MovieController extends Controller
      * Delete movie
      * @param $id
      * @return Response
-     */
+    */
     public function delete($id)
     {
         try {

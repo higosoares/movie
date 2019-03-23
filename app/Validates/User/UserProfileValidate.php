@@ -3,28 +3,29 @@
  * Created by PhpStorm.
  * User: HIGO
  * Date: 18/09/2018
- * Time: 17:51
+ * Time: 17:50
  */
 
-namespace App\Validates\Category;
+namespace App\Validates\User;
 use App\Traits\LancadorDeExcecao;
 
-class CategoryValidate
+class UserProfileValidate
 {
     use LancadorDeExcecao;
 
     public static function rules()
     {
         return [
-            'tx_name_category' => 'required|string|max:255'
+            'id_user' => 'required|int|in:1,11',
+            'id_profile' => 'required|int|in:1,11'
         ];
     }
 
     public static function messages()
     {
         return [
-            'tx_name_category.required' => 'Favor informar o nome da categoria',
-            'tx_name_category.max' => 'Tamanho de nome da categoria inválido',
+            'id_user.required' => 'Favor informar o usuário',
+            'id_profile.required' => 'Favor informar o perfil',
         ];
     }
 
@@ -51,10 +52,10 @@ class CategoryValidate
         }
     }
 
-    public function validateCategory($category)
+    public function validateUserProfile($userProfile)
     {
-        if (!$category) {
-            $this->excecao(['id' => ['found' => 'Category not found']]);
+        if (!$userProfile) {
+            $this->excecao(['id' => ['found' => 'User Profile not found']]);
         }
     }
 }

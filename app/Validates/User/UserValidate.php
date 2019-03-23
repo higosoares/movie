@@ -13,12 +13,27 @@ class UserValidate
 {
     use LancadorDeExcecao;
 
-    public static function rule()
+    public static function rules()
     {
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255', //unique:tb_user,email,{$id},id
             'password' => 'nullable|string|min:6|max:255',
+        ];
+    }
+
+    public static function messages()
+    {
+        return [
+            'name.required' => 'Favor informar o nome do usuário',
+            'name.max' => 'Tamanho de nome do usuário inválido',
+            'email.required' => 'Favor informar o e-mail do usuário',
+            'email.email' => 'Tamanho de e-mail do usuário inválido',
+            'email.max' => 'Favor informar o e-mail do usuário válido',
+            //'email.unique' => 'E-mail já existente',
+            'password.min' => 'Tamanho de e-mail do usuário inválido',
+            'password.max' => 'Tamanho de e-mail do usuário inválido',
+
         ];
     }
 
@@ -29,7 +44,7 @@ class UserValidate
      */
     public function validateParameters($params)
     {
-        $validator = \Validator::make((array) $params, self::rule());
+        $validator = \Validator::make((array) $params, self::rules(), self::messages());
 
         if ($validator->fails())
         {
@@ -41,7 +56,7 @@ class UserValidate
     public function validateInteger($id)
     {
         if (!is_int($id)) {
-            $this->excecao(['id' => ['invalid' => 'User invalid']]);
+            $this->excecao(['id' => ['invalid' => 'Id invalid']]);
         }
     }
 
