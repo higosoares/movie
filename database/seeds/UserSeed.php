@@ -29,5 +29,16 @@ class UserSeed extends Seeder
                 'created_at' => new \DateTime()
             ]
         );
+
+        DB::table('tb_user')->insert(
+            [
+                'id' => 2,
+                'name' => 'Teste',
+                'email' => 'teste@gmail.com',
+                'password' => Hash::make('123456'),
+                'situation' => 1,
+                'created_at' => new \DateTime()
+            ]
+        );
     }
 }
