@@ -16,14 +16,9 @@ Route::get('/', function () {
 });
 Route::get('/home', 'Home\HomeController@index');
 
-Route::group(array('prefix' => 'user'), function() {
-    Route::get('/', 'User\UserController@index');
-    Route::get('/{id}', 'User\UserController@editForm');
-    Route::post('/{id}', 'User\UserController@edit');
-    Route::delete('/{id}', 'User\UserController@delete');
-});
 
-Route::group(array('prefix' => 'movie'), function() {
+
+Route::group(['prefix' => 'movie'], function() {
     Route::get('/', 'Movie\MovieController@listForm');
     Route::get('/{id}', 'Movie\MovieController@index');
     //Route::get('/{id}', 'Movie\MovieController@editForm');
@@ -32,9 +27,21 @@ Route::group(array('prefix' => 'movie'), function() {
 });
 Route::get('/movies', 'Movie\MovieController@list');
 
-Route::group(array('prefix' => 'category'), function() {
+Route::group(['prefix' => 'category'], function() {
     Route::get('/{id}', 'Category\CategoryController@index');
 });
+
+Route::group(['middleware' => 'checkRole', 'prefix' => 'admin'], function() {
+    Route::get('/', 'Admin\AdminController@index');
+
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/', 'User\UserController@index');
+        Route::get('/{id}', 'User\UserController@editForm');
+        Route::post('/{id}', 'User\UserController@edit');
+        Route::delete('/{id}', 'User\UserController@delete');
+    });
+});
+
 
 Auth::routes();
 
