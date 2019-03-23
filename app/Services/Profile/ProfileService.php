@@ -8,104 +8,97 @@
 
 namespace App\Services\Profile;
 
-use App\Models\User;
-use App\Repositories\User\UserRepository;
+use App\Models\Profile;
+use App\Repositories\Profile\ProfileRepository;
 use App\Services\GenericService;
 use App\Traits\LancadorDeExcecao;
-use App\Validates\User\UserValidate;
-use Illuminate\Container\Container;
+use App\Validates\Profile\ProfileValidate;
 use stdClass;
 
-class UserService extends GenericService
+class ProfileService extends GenericService
 {
     use LancadorDeExcecao;
 
     /**
      *
-     * @var UserRepository
+     * @var ProfileRepository
      */
-    protected $userRepository;
+    protected $profileRepository;
 
     /**
      *
-     * @var UserService
+     * @var ProfileValidate
      */
-    protected $userService;
+    protected $profileValidate;
 
-    /**
-     *
-     * @var UserValidate
-     */
-    protected $userValidate;
-
-    public function __construct(UserRepository $userRepository, UserValidate $userValidate)
+    public function __construct(ProfileRepository $profileRepository, ProfileValidate $profileValidate)
     {
         parent::__construct();
-        $this->userRepository = $userRepository;
-        $this->userValidate = $userValidate;
+        $this->profileRepository = $profileRepository;
+        $this->profileValidate = $profileValidate;
 
     }
 
     /**
-     * Register new user
+     * Register new profile
      * @param stdClass $params
-     * @return User
+     * @return Profile
      */
     public function register($params)
     {
-        $this->userValidate->validateParameters($params);
-        $user = $this->userRepository->register($params);
-        return $user;
+        $this->profileValidate->validateParameters($params);
+        $profile = $this->profileRepository->register($params);
+        return $profile;
     }
 
 
     /**
-     * List users
+     * List profiles
      * @param \stdClass $params
      * @return array
      */
     public function list($params = null)
     {
-        return $this->userRepository->list($params);
+        return $this->profileRepository->list($params);
     }
 
     /**
-     * Edit user
+     * Edit profile
      * @param int $id
      * @param stdClass $params
-     * @return User
+     * @return Profile
      */
     public function edit($id, $params)
     {
         $this->userValidate->validateParameters($params);
-        $user = $this->retrieveById((int) $id);
-        $user = $this->userRepository->edit($user->id, $params);
-        $user->refresh();
-        return $user;
+        $profile = $this->retrieveById((int) $id);
+        $profile = $this->profileRepository->edit($profile->id_profile, $params);
+        $profile->refresh();
+        return $profile;
     }
 
     /**
-     * Delete user
+     * Delete profile
      * @param integer $id
      */
     public function delete($id)
     {
-        $user = $this->userRepository->retrieve($id);
-        $this->userValidate->validateUser($user);
-        $this->userRepository->delete($user->id);
+        $profile = $this->profileRepository->retrieve($id);
+        $this->profileValidate->validateProfile($profile);
+        $this->profileRepository->delete($profile->id_profile);
     }
 
     /**
-     * Retrieve user by id
+     * Retrieve profile by id
      * @param int $id
-     * @return User
+     * @return Profile
      */
-    public function retrieveById($id): User
+    public function retrieveById($id): Profile
     {
-        $this->userValidate->validateInteger($id);
-        $user = $this->userRepository->retrieve($id);
-        $this->userValidate->validateUser($user);
-        return $user;
+        $this->profileValidate->validateInteger($id);
+        $profile = $this->profileRepository->retrieve($id);
+        $this->profileValidate->validateProfile($profile);
+        return $profile;
     }
 
 }

@@ -9,7 +9,7 @@
 namespace App\Validates\Profile;
 use App\Traits\LancadorDeExcecao;
 
-class UserValidate
+class ProfileValidate
 {
     use LancadorDeExcecao;
 
@@ -43,7 +43,12 @@ class UserValidate
         }
     }
 
-
+    /**
+     * Valida integer
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function validateInteger($id)
     {
         if (!is_int($id)) {
@@ -51,6 +56,12 @@ class UserValidate
         }
     }
 
+    /**
+     * Validate profile
+     *
+     * @param [type] $profile
+     * @return void
+     */
     public function validateProfile($profile)
     {
         if (!$profile) {
