@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,8 +19,8 @@ class Profile extends Model
         'tx_description_movie'
     ];
 
- /*    public function user()
+    public function user()
     {
         return $this->belongsTo('App\UserProfile');
-    } */
+    }
 }

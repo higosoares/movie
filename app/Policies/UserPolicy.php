@@ -10,11 +10,12 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserProfile;
 
 class UserPolicy
 {
     /**
-     * Determine if the given category can be updated by the user.
+     * Determine if the user is admin.
      *
      * @param  \App\Models\User  $user
      * @return bool
@@ -24,16 +25,14 @@ class UserPolicy
         $perfis = self::retornaPerfil($user->id);
 
         foreach ($perfis as $perfil) {
-            return 1 === $perfil->id_perfil;
+            return 1 === $perfil->id_profile;
         }
 
     }
 
     private function retornaPerfil($idUser)
     {
-        $perfis = DB::select('SELECT * FROM ta_user_perfil  WHERE id_user =  ?', [
-            $idUser
-        ]);
+        $perfis = UserProfile::where('id_user', $idUser)->get();
         return $perfis;
     }
 }
