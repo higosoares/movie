@@ -28,7 +28,7 @@ class CheckRole
             return $next($request);
         }
 
-        return redirect('/home')->with('errors', 'Your are not allowed to this page.');
+        return redirect('/home')->with('error', 'Your are not allowed to this page.');
     }
 
 }

@@ -2,6 +2,24 @@
 
 @section('content')
     <h4 class="latest-text w3_latest_text">Featured Movies</h4>
+
+{{--      @if (Session::has('errors'))
+    <div class="alert alert-danger" role="alert">
+        {{ $errors }}
+      </div>
+    @endif  --}}
+
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @elseif (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     <div class="container">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs" role="tablist">
