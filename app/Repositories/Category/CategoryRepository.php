@@ -8,19 +8,19 @@
 
 namespace App\Repositories\Category;
 
-
-use App\Interfaces\GenericInterface;
-use App\Models\Category;
 use stdClass;
+use App\Models\Category;
+use Illuminate\Support\Collection;
+use App\Interfaces\Category\CategoryInterface;
 
-class CategoryRepository implements GenericInterface
+class CategoryRepository implements CategoryInterface
 {
     /**
      * Register new category
      * @param stdClass $params
      * @return Category
      */
-    public function register($params)
+    public function register(stdClass $params) : Category
     {
         $entity = new Category([
             'tx_name_category' => $params->tx_name_category,
@@ -36,9 +36,9 @@ class CategoryRepository implements GenericInterface
      * @param stdClass $params
      * @return Category
      */
-    public function edit($id, $params)
+    public function edit(int $id, stdCLass $params) : Category
     {
-        $entity = $this->retrieve($id);
+        $entity = $this->retrieveById($id);
         $entity->fill([
             'tx_name_category' => $params->tx_name_category,
         ]);
@@ -52,16 +52,16 @@ class CategoryRepository implements GenericInterface
      */
     public function delete($id)
     {
-        $entity = $this->retrieve($id);
+        $entity = $this->retrieveById($id);
         return $entity->delete();
     }
 
     /**
      * List category
-     * @param \stdClass $params
-     * @return array
+     * @param stdClass $params
+     * @return Collection
      */
-    public function list($params=null)
+    public function list($params=null) : Collection
     {
         $query = Category::query();
 
@@ -80,7 +80,7 @@ class CategoryRepository implements GenericInterface
      * @param int $id
      * @return Category
      */
-    public function retrieve($id)
+    public function retrieveById(int $id) : ?Category
     {
         return Category::find($id);
     }

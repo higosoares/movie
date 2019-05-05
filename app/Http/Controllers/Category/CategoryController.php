@@ -8,22 +8,22 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Exceptions\MovieException;
-use App\Http\Controllers\Controller;
-use App\Services\Category\CategoryService;
-use Illuminate\Container\Container;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Exceptions\MovieException;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Interfaces\Category\CategoryInterface;
 
 class CategoryController extends Controller
 {
-    protected $categoryService;
+    protected $categoryInterface;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryInterface $categoryInterface)
     {
         $this->middleware('auth');
-        $this->categoryService = $categoryService;
+        $this->categoryInterface = $categoryInterface;
     }
 
     /**
@@ -32,9 +32,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $catogories = $this->categoryService->list();
-        dd($catogories);
-        return view('category.index')->with(['categories' => $catogories]);
+        try {
+            $catogories = $this->categoryInterface->list();
+
+            return view('category.index')->with(['categories' => $catogories]);
+        } catch (MovieException $e) {
+            abort(404);
+        }
     }
 
     /**
@@ -43,8 +47,13 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = $this->categoryService->retrieveById($id);
-        return view('category.show')->with(['category' => $category]);
+
+        try {
+            $category = $this->categoryInterface->retrieveById($id);
+            return view('category.show')->with(['category' => $category]);
+        } catch (MovieException $e) {
+            abort(404);
+        }
     }
 
     /**
@@ -68,7 +77,7 @@ class CategoryController extends Controller
             $params = new \stdClass();
             $params->tx_name_category = $request->input('tx_name_category');
 
-            $category = $this->categoryService->register($params);
+            $category = $this->categoryInterface->register($params);
             $retorno = [
                 'status' => 201,
                 'resultado' => $category
@@ -90,12 +99,15 @@ class CategoryController extends Controller
      */
     public function editForm($id)
     {
-        $category = $this->categoryService->retrieveById((int) $id);
+        try {
+            $category = $this->categoryInterface->retrieveById((int) $id);
 
-        return view('category.editForm')->with([
-            'category' => $category,
-        ]);
-
+            return view('category.editForm')->with([
+                'category' => $category,
+            ]);
+        } catch (MovieException $e) {
+            abort(404);
+        }
     }
 
     /**
@@ -111,7 +123,7 @@ class CategoryController extends Controller
             $params = new \stdClass();
             $params->tx_name_category = $request->input('tx_name_category');
 
-            $category = $this->categoryService->edit($id, $params);
+            $category = $this->categoryInterface->edit($id, $params);
             $retorno = [
                 'status' => 200,
                 'resultado' => $category
@@ -136,7 +148,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         try {
-            $this->categoryService->delete((int)$id);
+            $this->categoryInterface->delete((int)$id);
             $retorno = [
                 'status' => 203
             ];

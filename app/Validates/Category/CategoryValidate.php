@@ -54,7 +54,7 @@ class CategoryValidate
     public function validateCategory($category)
     {
         if (!$category) {
-            $this->excecao(['id' => ['found' => 'Category not found']]);
+            $this->excecao(['category' => ['found' => 'Category not found']]);
         }
     }
 }

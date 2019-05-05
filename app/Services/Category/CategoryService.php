@@ -8,24 +8,25 @@
 
 namespace App\Services\Category;
 
-
-use App\Models\Category;
-use App\Repositories\Category\CategoryRepository;
-use App\Services\GenericService;
-use App\Traits\LancadorDeExcecao;
-use Illuminate\Container\Container;
 use stdClass;
+use App\Models\Category;
+use App\Traits\LancadorDeExcecao;
+use Illuminate\Support\Collection;
+use App\Interfaces\Category\CategoryInterface;
+use App\Repositories\Category\CategoryRepository;
+use App\Validates\Category\CategoryValidate;
 
-class CategoryService extends GenericService
+class CategoryService implements CategoryInterface
 {
     use LancadorDeExcecao;
 
     protected $categoryRepository;
+    protected $categoryValidate;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, CategoryValidate $categoryValidate)
     {
-        parent::__construct();
         $this->categoryRepository = $categoryRepository;
+        $this->categoryValidate = $categoryValidate;
     }
 
     /**
@@ -33,9 +34,9 @@ class CategoryService extends GenericService
      * @param stdClass $params
      * @return Category
      */
-    public function register($params)
+    public function register(stdClass $params) : Category
     {
-        //$this->userValidate->validateParameters($params);
+        $this->categoryValidate->validateParameters($params);
         $category = $this->categoryRepository->register($params);
         return $category;
     }
@@ -43,10 +44,10 @@ class CategoryService extends GenericService
 
     /**
      * List categories
-     * @param \stdClass $params
-     * @return array
+     * @param stdClass $params
+     * @return Collection
      */
-    public function list($params = null)
+    public function list($params = null) : Collection
     {
         return $this->categoryRepository->list($params);
     }
@@ -57,12 +58,11 @@ class CategoryService extends GenericService
      * @param stdClass $params
      * @return Category
      */
-    public function edit($id, $params)
+    public function edit(int $id, stdClass $params) : Category
     {
-        //$this->userValidate->validateParameters($params);
+        $this->categoryValidate->validateParameters($params);
         $category = $this->retrieveById((int) $id);
         $category = $this->categoryRepository->edit($category->id_category, $params);
-        $category->refresh();
         return $category;
     }
 
@@ -70,10 +70,10 @@ class CategoryService extends GenericService
      * Delete category
      * @param integer $id
      */
-    public function delete($id)
+    public function delete(int $id)
     {
-        $category = $this->categoryRepository->retrieve($id);
-        //$this->userValidate->validateUser($user);
+        $category = $this->categoryRepository->retrieveById($id);
+        $this->categoryValidate->validateInteger($id);
         $this->categoryRepository->delete($category->id_category);
     }
 
@@ -82,11 +82,11 @@ class CategoryService extends GenericService
      * @param int $id
      * @return Category
      */
-    public function retrieveById($id): Category
+    public function retrieveById(int $id): ?Category
     {
-        //$this->userValidate->validateInteger($id);
-        $category = $this->categoryRepository->retrieve($id);
-        //$this->userValidate->validateUser($movie);
+        $this->categoryValidate->validateInteger($id);
+        $category = $this->categoryRepository->retrieveById($id);
+        $this->categoryValidate->validateCategory($category);
         return $category;
     }
 
