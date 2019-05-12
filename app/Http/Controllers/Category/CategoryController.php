@@ -33,9 +33,9 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $catogories = $this->categoryInterface->list();
+            $categories = $this->categoryInterface->list();
 
-            return view('category.index')->with(['categories' => $catogories]);
+            return view('category.index')->with(['categories' => $categories]);
         } catch (MovieException $e) {
             abort(404);
         }
