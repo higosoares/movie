@@ -28,12 +28,6 @@ class UserService extends GenericService
 
     /**
      *
-     * @var UserService
-     */
-    protected $userService;
-
-    /**
-     *
      * @var UserValidate
      */
     protected $userValidate;

@@ -16,7 +16,7 @@ use App\Validates\User\UserValidate;
 use Illuminate\Container\Container;
 use stdClass;
 
-class UserService extends GenericService
+class UserProfileService extends GenericService
 {
     use LancadorDeExcecao;
 
@@ -25,12 +25,6 @@ class UserService extends GenericService
      * @var UserRepository
      */
     protected $userRepository;
-
-    /**
-     *
-     * @var UserService
-     */
-    protected $userService;
 
     /**
      *
