@@ -3,9 +3,9 @@ var user = {
     register: function(url, params) {
         $.post(url, params, function(retorno) {
         }).done(function (response) {
-            
+            mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao criar o usuário.', 2000);
         }).fail(function(response) {
-            //mensagem.validacao.tratarErrosIndiv(response);
+            mensagem.mensagemSemRefresh('error', 'Erro', 'Ocorreu um erro ao registrar o usúario.');
         });
     },
 
@@ -19,9 +19,9 @@ var user = {
                 'X-CSRF-Token': $('input[name=_token]').val()
             }
         }).done(function(response) {
-            //mensagemComRefresh('Sucesso', 'Edição de programa realizada com sucesso', 'success', 3000);
+            mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao editar o usuário.', 2000);
         }).fail(function(response) {
-            //mensagem.validacao.tratarErrosIndiv(response);
+            mensagem.mensagemSemRefresh('error', 'Erro', 'Ocorreu um erro ao editar o usúario.');
         });
     },
 
@@ -45,9 +45,9 @@ var user = {
                         'X-CSRF-Token': $('input[name=_token]').val()
                     }
                 }).done(function(response) {
-                    //mensagemComRefresh('Sucesso', 'Programa excluído com sucesso', 'success', 3000);
+                    mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao excluir o usuário.', 2000);
                 }).fail(function(response) {
-                    //mensagem.validacao.tratarErro(response);
+                    mensagem.mensagemSemRefresh('error', 'Erro', 'Ocorreu um erro ao excluir o usúario.');
                 });
             });
     }

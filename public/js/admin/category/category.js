@@ -44,9 +44,9 @@ var category = {
                         'X-CSRF-Token': $('input[name=_token]').val()
                     }
                 }).done(function(response) {
-                    //mensagemComRefresh('Sucesso', 'Programa excluído com sucesso', 'success', 3000);
+                    mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao excluir a categoria.', 2000);
                 }).fail(function(response) {
-                    mensagem.mensagemSemRefresh('error', 'Erro!', 'Erro ao excluir');
+                    mensagem.mensagemSemRefresh('error', 'Erro', 'Ocorreu um erro ao excluir  a categoria.');
                 });
             }
         });

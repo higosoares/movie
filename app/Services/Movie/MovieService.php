@@ -8,27 +8,33 @@
 
 namespace App\Services\Movie;
 
-
 use App\Models\Movie;
-use App\Repositories\Movie\MovieRepository;
-use App\Services\GenericService;
 use App\Traits\LancadorDeExcecao;
-use Illuminate\Container\Container;
 use stdClass;
+use App\Validates\Movie\MovieValidate;
+use App\Interfaces\Movie\MovieServiceInterface;
+use App\Interfaces\Movie\MovieRepositoryInterface;
 
-class MovieService extends GenericService
+class MovieService implements MovieServiceInterface
 {
     use LancadorDeExcecao;
 
-    /*
-     * @var MovieRepository
-     */
-    protected $movieRepository;
 
-    public function __construct(MovieRepository $movieRepository)
+    /*
+     * @var MovieValidate
+     */
+    protected $movieValidate;
+
+        /*
+     * @var MovieRepositoryInterface
+     */
+    protected $movieRepositoryInterface;
+
+    public function __construct(MovieValidate $movieValidate,
+    MovieRepositoryInterface $movieRepositoryInterface)
     {
-        parent::__construct();
-        $this->movieRepository = $movieRepository;
+        $this->movieValidate = $movieValidate;
+        $this->movieRepositoryInterface = $movieRepositoryInterface;
     }
 
     /**
@@ -36,10 +42,10 @@ class MovieService extends GenericService
      * @param stdClass $params
      * @return Movie
      */
-    public function register($params)
+    public function register(stdClass $params) : Movie
     {
-        //$this->userValidate->validateParameters($params);
-        $movie = $this->movieRepository->register($params);
+        $this->movieValidate->validateParameters($params);
+        $movie = $this->movieRepositoryInterface->register($params);
         return $movie;
     }
 
@@ -60,12 +66,11 @@ class MovieService extends GenericService
      * @param stdClass $params
      * @return Movie
      */
-    public function edit($id, $params)
+    public function edit(int $id, stdClass $params) : Movie
     {
-        //$this->userValidate->validateParameters($params);
+        $this->movieValidate->validateParameters($params);
         $movie = $this->retrieveById((int) $id);
-        $movie = $this->movieRepository->edit($movie->id_movie, $params);
-        $movie->refresh();
+        $movie = $this->movieRepositoryInterface->edit($movie->id_movie, $params);
         return $movie;
     }
 
@@ -73,11 +78,11 @@ class MovieService extends GenericService
      * Delete movie
      * @param integer $id
      */
-    public function delete($id)
+    public function delete(int $id)
     {
-        $movie = $this->movieRepository->retrieve($id);
-        //$this->userValidate->validateUser($user);
-        $this->movieRepository->delete($movie->id_movie);
+        $movie = $this->movieRepository->retrieveById($id);
+        $this->movieValidate->validateMovie($movie);
+        $this->movieRepositoryInterface->delete($movie->id_movie);
     }
 
     /**
@@ -85,11 +90,11 @@ class MovieService extends GenericService
      * @param int $id
      * @return Movie
      */
-    public function retrieveById($id): Movie
+    public function retrieveById(int $id): Movie
     {
-        //$this->userValidate->validateInteger($id);
-        $movie = $this->movieRepository->retrieve($id);
-        //$this->userValidate->validateUser($movie);
+        $this->movieValidate->validateInteger($id);
+        $movie = $this->movieRepository->retrieveById($id);
+        $this->movieRepositoryInterface->validateMovie($movie);
         return $movie;
     }
 

@@ -49,10 +49,10 @@ Route::group(['middleware' => 'checkRole', 'prefix' => 'admin'], function() {
 
     Route::group(['prefix' => 'category'], function() {
         Route::get('/', 'Category\CategoryController@index')->name('category/index');
-        Route::get('/{id}', 'Category\CategoryController@show')->name('category/show');
+        /* Route::get('/{id}', 'Category\CategoryController@show')->name('category/show'); */
         Route::get('/registerForm', 'Category\CategoryController@registerForm')->name('category/registerForm');
         Route::post('/', 'Category\CategoryController@register')->name('category.register');
-        Route::get('/editForm', 'Category\CategoryController@editForm')->name('category/editForm');
+        Route::get('/{id}', 'Category\CategoryController@editForm')->name('category/editForm');
         Route::put('/{id}', 'Category\CategoryController@edit')->name('category.edit');
         Route::delete('/{id}', 'Category\CategoryController@delete')->name('category.delete');
     });

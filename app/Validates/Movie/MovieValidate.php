@@ -7,13 +7,11 @@
  */
 
 namespace App\Validates\Movie;
-use App\Traits\LancadorDeExcecao;
 
+use Exception;
 
 class MovieValidate
 {
-    use LancadorDeExcecao;
-
     public static function rules()
     {
         return [
@@ -48,7 +46,7 @@ class MovieValidate
 
         if ($validator->fails())
         {
-            $this->excecao($validator->failed());
+            throw new Exception($validator->failed());
         }
     }
 
@@ -56,14 +54,14 @@ class MovieValidate
     public function validateInteger($id)
     {
         if (!is_int($id)) {
-            $this->excecao(['id' => ['invalid' => 'Id invalid']]);
+            throw new Exception('Id invalid');
         }
     }
 
     public function validateMovie($movie)
     {
         if (!$movie) {
-            $this->excecao(['id' => ['found' => 'Movie not found']]);
+            throw new Exception('Movie not found');
         }
     }
 }

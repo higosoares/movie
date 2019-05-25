@@ -10,23 +10,24 @@ namespace App\Http\Controllers\Movie;
 
 use App\Exceptions\MovieException;
 use App\Http\Controllers\Controller;
-use App\Services\Movie\MovieService;
-use Illuminate\Container\Container;
+use App\Interfaces\Movie\MovieServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use app\Requests\Movie\MovieRequest;
+use Exception;
 
 class MovieController extends Controller
 {
     /*
-     * @var MovieService
+     * @var MovieInterface
      */
-    protected $movieService;
+    protected $movieInterface;
 
-    public function __construct(MovieService $movieService)
+    public function __construct(MovieServiceInterface $movieInterface)
     {
         $this->middleware('auth');
-        $this->movieService = $movieService;
+        $this->movieInterface = $movieInterface;
     }
 
     /**
@@ -44,7 +45,7 @@ class MovieController extends Controller
     */
     public function show($id)
     {
-        $movie = $this->movieService->retrieveById($id);
+        $movie = $this->movieInterface->retrieveById($id);
         return view('movie.show')->with(['movie' => $movie]);
     }
 
@@ -60,10 +61,10 @@ class MovieController extends Controller
 
     /**
      * Register new movie
-     * @param Request $request
+     * @param MovieRequest $request
      * @return Response
     */
-    public function register(Request $request)
+    public function register(MovieRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -79,7 +80,7 @@ class MovieController extends Controller
             $params->tx_url_trailer_movie = $request->input('tx_url_trailer_movie');
             $params->qt_star_rating_movie = $request->input('qt_star_rating_movie');
 
-            $movie = $this->movieService->register($params);
+            $movie = $this->movieInterface->register($params);
             $retorno = [
                 'status' => 201,
                 'resultado' => $movie
@@ -88,7 +89,7 @@ class MovieController extends Controller
         } catch(MovieException $e) {
             DB::rollback();
             $retorno = [
-                'status' => $e->getCode(),
+                'status' => 400,
                 'resultado' => $e->retorno
             ];
         }
@@ -101,7 +102,7 @@ class MovieController extends Controller
     */
     public function editForm($id)
     {
-        $movie = $this->movieService->retrieveById((int) $id);
+        $movie = $this->movieInterface->retrieveById((int) $id);
 
         return view('movie.editForm')->with([
             'movie' => $movie,
@@ -112,10 +113,10 @@ class MovieController extends Controller
     /**
      * Edit movie
      * @param int $id
-     * @param Request $request
+     * @param MovieRequest $request
      * @return Response
     */
-    public function edit($id, Request $request)
+    public function edit($id, MovieRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -131,7 +132,7 @@ class MovieController extends Controller
             $params->tx_url_trailer_movie = $request->input('tx_url_trailer_movie');
             $params->qt_star_rating_movie = $request->input('qt_star_rating_movie');
 
-            $movie = $this->movieService->edit($id, $params);
+            $movie = $this->movieInterface->edit($id, $params);
             $retorno = [
                 'status' => 200,
                 'resultado' => $movie
@@ -156,13 +157,13 @@ class MovieController extends Controller
     public function delete($id)
     {
         try {
-            $this->movieService->delete((int)$id);
+            $this->movieInterface->delete((int)$id);
             $retorno = [
                 'status' => 203
             ];
-        } catch (MovieException $e) {
+        } catch (Exception $e) {
             $retorno = [
-                'status' => $e->getCode(),
+                'status' => 400,
                 'resultado' => $e->retorno
             ];
         }

@@ -8,19 +8,18 @@
 
 namespace App\Repositories\Movie;
 
-
-use App\Interfaces\GenericInterface;
 use App\Models\Movie;
 use stdClass;
+use App\Interfaces\Movie\MovieRepositoryInterface;
 
-class MovieRepository implements GenericInterface
+class MovieRepository implements MovieRepositoryInterface
 {
     /**
      * Register new movie
      * @param stdClass $params
      * @return Movie
      */
-    public function register($params)
+    public function register(stdClass $params) : Movie
     {
         $entity = new Movie([
             'tx_name_movie' => $params->tx_name_movie,
@@ -40,14 +39,14 @@ class MovieRepository implements GenericInterface
     }
 
     /**
-     * Edit user
+     * Edit movie
      * @param int $id
      * @param stdClass $params
      * @return Movie
      */
-    public function edit($id, $params)
+    public function edit(int $id, stdClass $params) : Movie
     {
-        $entity = $this->retrieve($id);
+        $entity = $this->retrieveById($id);
         $entity->fill([
             'tx_name_movie' => $params->tx_name_movie,
             'tx_name_director' => $params->tx_name_director,
@@ -68,15 +67,15 @@ class MovieRepository implements GenericInterface
     /**
      * Delete movie
      */
-    public function delete($id)
+    public function delete(int $id)
     {
-        $entity = $this->retrieve($id);
+        $entity = $this->retrieveById($id);
         return $entity->delete();
     }
 
     /**
      * List movie
-     * @param \stdClass $params
+     * @param stdClass $params
      * @return array
      */
     public function list($params=null)
@@ -101,7 +100,7 @@ class MovieRepository implements GenericInterface
      * @param int $id
      * @return Movie
      */
-    public function retrieve($id)
+    public function retrieveById(int $id) : ?Movie
     {
         return Movie::find($id);
     }
