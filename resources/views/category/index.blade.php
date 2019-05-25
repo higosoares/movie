@@ -26,6 +26,11 @@
                 <div class="container">
                     <div class="browse-inner">
                         <div class="col-md-12">
+                            <a class="btn btn-primary delete-movie" href="{{ route('category/registerForm') }}">
+                                Cadastrar
+                            </a>
+                        </div>
+                        <div class="col-md-12">
                             <table class="table table-striped datatable">
                                 <thead>
                                     <tr>
@@ -40,8 +45,14 @@
                                         <tr>
                                             <td>{{ $category->id_category }}</td>
                                             <td>{{ $category->tx_name_category }}</td>
-                                            <td>Visualizar</td>
-                                            <td>Excluir</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="{{ route('category/editForm', [ 'id' => $category->id_category]) }}">
+                                                    Visualizar
+                                                </a>
+                                                <a data-url="{{ route('category.delete', ['id' => $category->id_category]) }}" class="btn btn-primary delete-category">
+                                                    Excluir
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -62,6 +73,10 @@
 
 @endsection
 @section('js-files')
-    <script src="{{ asset('js/admin/admin.js') }}"></script>
     <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/mensagem/mensagem.js') }}"></script>
+    <script src="{{ asset('js/admin/admin.js') }}"></script>
+    <script src="{{ asset('js/admin/category/category.js') }}"></script>
+    <script src="{{ asset('js/admin/category/index.js') }}"></script>
 @endsection

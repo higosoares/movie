@@ -11,9 +11,9 @@ namespace App\Repositories\Category;
 use stdClass;
 use App\Models\Category;
 use Illuminate\Support\Collection;
-use App\Interfaces\Category\CategoryInterface;
+use App\Interfaces\Category\CategoryRepositoryInterface;
 
-class CategoryRepository implements CategoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     /**
      * Register new category
@@ -26,7 +26,6 @@ class CategoryRepository implements CategoryInterface
             'tx_name_category' => $params->tx_name_category,
         ]);
         $entity->save();
-        $entity->refresh();
         return $entity;
     }
 

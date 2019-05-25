@@ -6,7 +6,7 @@ use stdClass;
 use App\Models\Category;
 use Illuminate\Support\Collection;
 
-interface CategoryInterface
+interface CategoryRepositoryInterface
 {
 
     public function register(stdClass $params) : Category;

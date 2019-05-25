@@ -12,21 +12,22 @@ use stdClass;
 use App\Models\Category;
 use App\Traits\LancadorDeExcecao;
 use Illuminate\Support\Collection;
-use App\Interfaces\Category\CategoryInterface;
-use App\Repositories\Category\CategoryRepository;
+use App\Interfaces\Category\CategoryServiceInterface;
+use App\Interfaces\Category\CategoryRepositoryInterface;
 use App\Validates\Category\CategoryValidate;
 
-class CategoryService implements CategoryInterface
+class CategoryService implements CategoryServiceInterface
 {
     use LancadorDeExcecao;
 
-    protected $categoryRepository;
     protected $categoryValidate;
+    protected $categoryRepositoryInterface;
 
-    public function __construct(CategoryRepository $categoryRepository, CategoryValidate $categoryValidate)
+    public function __construct(CategoryValidate $categoryValidate,
+    CategoryRepositoryInterface $categoryRepositoryInterface)
     {
-        $this->categoryRepository = $categoryRepository;
         $this->categoryValidate = $categoryValidate;
+        $this->categoryRepositoryInterface = $categoryRepositoryInterface;
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoryService implements CategoryInterface
     public function register(stdClass $params) : Category
     {
         $this->categoryValidate->validateParameters($params);
-        $category = $this->categoryRepository->register($params);
+        $category = $this->categoryRepositoryInterface->register($params);
         return $category;
     }
 
@@ -49,7 +50,7 @@ class CategoryService implements CategoryInterface
      */
     public function list($params = null) : Collection
     {
-        return $this->categoryRepository->list($params);
+        return $this->categoryRepositoryInterface->list($params);
     }
 
     /**
@@ -62,7 +63,7 @@ class CategoryService implements CategoryInterface
     {
         $this->categoryValidate->validateParameters($params);
         $category = $this->retrieveById((int) $id);
-        $category = $this->categoryRepository->edit($category->id_category, $params);
+        $category = $this->categoryRepositoryInterface->edit($category->id_category, $params);
         return $category;
     }
 
@@ -74,7 +75,7 @@ class CategoryService implements CategoryInterface
     {
         $category = $this->categoryRepository->retrieveById($id);
         $this->categoryValidate->validateInteger($id);
-        $this->categoryRepository->delete($category->id_category);
+        $this->categoryRepositoryInterface->delete($category->id_category);
     }
 
     /**
@@ -85,7 +86,7 @@ class CategoryService implements CategoryInterface
     public function retrieveById(int $id): ?Category
     {
         $this->categoryValidate->validateInteger($id);
-        $category = $this->categoryRepository->retrieveById($id);
+        $category = $this->categoryRepositoryInterface->retrieveById($id);
         $this->categoryValidate->validateCategory($category);
         return $category;
     }

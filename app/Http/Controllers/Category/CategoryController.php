@@ -14,13 +14,13 @@ use Illuminate\Http\Response;
 use App\Exceptions\MovieException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Interfaces\Category\CategoryInterface;
+use App\Interfaces\Category\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
     protected $categoryInterface;
 
-    public function __construct(CategoryInterface $categoryInterface)
+    public function __construct(CategoryServiceInterface $categoryInterface)
     {
         $this->middleware('auth');
         $this->categoryInterface = $categoryInterface;
@@ -47,7 +47,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-
         try {
             $category = $this->categoryInterface->retrieveById($id);
             return view('category.show')->with(['category' => $category]);
@@ -148,6 +147,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         try {
+            dd($id);
             $this->categoryInterface->delete((int)$id);
             $retorno = [
                 'status' => 203
