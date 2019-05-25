@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Movie extends Model
 {
@@ -31,8 +29,8 @@ class Movie extends Model
     ];
 
 
-    public function roles()
+    public function categories()
     {
-        return $this->belongsToMany(Category::class, 'ta_movie_category', 'id_movie', 'id_category');
+        return $this->belongsToMany('App\Models\Category', 'ta_movie_category', 'id_movie', 'id_category');
     }
 }

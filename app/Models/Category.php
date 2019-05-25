@@ -19,4 +19,10 @@ class Category extends Model
         'tx_name_category'
     ];
 
+
+    public function movies()
+    {
+        return $this->belongsToMany('App\Models\Movie', 'ta_movie_category', 'id_category' , 'id_movie');
+    }
+
 }
