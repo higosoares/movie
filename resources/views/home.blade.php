@@ -818,11 +818,11 @@
                                             </p>
                                             <p class="fexi_header_para">
                                                 <span>Genres<label>:</label> </span>
-                                                @foreach($movie->roles as $mov)
+                                                @foreach($movie->categories()->get() as $mov)
                                                     <a href="/category/{{ $mov->id_category }}">{{ $mov->tx_name_category }}</a>
-                                                    @if((count($movie->roles) > 1) && (!$loop->last))
+                                                    @if($movie->categories()->count() > 1 && !$loop->last)
                                                         |
-                                                        @endif
+                                                    @endif
                                                 @endforeach
                                             </p>
                                             <p class="fexi_header_para fexi_header_para1">

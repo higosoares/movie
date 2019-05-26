@@ -19,8 +19,8 @@ class Profile extends Model
         'tx_description_movie'
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\UserProfile');
+        return $this->belongsToMany('App\Models\User', 'ta_user_profile', 'id_profile' , 'id_user');
     }
 }

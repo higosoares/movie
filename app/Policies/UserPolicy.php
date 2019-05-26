@@ -9,8 +9,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use App\Models\UserProfile;
 
 class UserPolicy
 {
@@ -22,17 +20,6 @@ class UserPolicy
      */
     public function isAdmin(User $user)
     {
-        $perfis = self::retornaPerfil($user->id);
-
-        foreach ($perfis as $perfil) {
-            return 1 === $perfil->id_profile;
-        }
-
-    }
-
-    private function retornaPerfil($idUser)
-    {
-        $perfis = UserProfile::where('id_user', $idUser)->get();
-        return $perfis;
+        return $user->profiles()->first()->id_profile === 1;
     }
 }

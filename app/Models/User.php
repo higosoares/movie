@@ -35,8 +35,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function profile()
+    public function profiles()
     {
-        return $this->belongsToMany('App\Models\UserProfile', 'ta_user_profile', 'id_user', 'id_profile');
+        return $this->belongsToMany('App\Models\Profile', 'ta_user_profile', 'id_user', 'id_profile');
     }
 }
