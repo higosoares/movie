@@ -15,7 +15,7 @@ Movie é uma aplicação web de catálogo de filmes a partir do framework Larave
 Crie no PgAdmin um banco chamado movie e em seguida rode o comando `php artisan migrate --seed` que irá criar as tabelas e popular o banco.
 Na pasta raiz utilize o comando : `php artisan serve`.
 
-##Testes
+## Testes
 Para visualizar a cobertura de código, segue os passos para instalar o xdebug no Windows : 
 - Rodar `php -i` e copie as informações do phpinfo e copie no link [https://xdebug.org/wizard.php](https://xdebug.org/wizard.php) que descobrirá qual .dll do xdebug irá baixar.
 - Na pasta C:\php\ext colar o arquivo .dll baixado e inserir no final do `php -i` o trecho
@@ -103,7 +103,7 @@ No composer.json verificar se possui a linha test em scripts conforme abaixo :
 
 Após rodar `composer run test`, abrir o arquivo no caminho **tests/build/coverage/index.html**
 
-##Telescope
+## Telescope
 Acesse a rota **/telescope** para visualizar as informações do Laravel Telescope.
 
 ## License
