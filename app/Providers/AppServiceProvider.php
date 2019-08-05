@@ -2,22 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Category;
-use App\Observers\CategoryObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Category::observe(CategoryObserver::class);
-    }
-
     /**
      * Register any application services.
      *
@@ -49,5 +38,15 @@ class AppServiceProvider extends ServiceProvider
             'App\Interfaces\Movie\MovieServiceInterface',
             'App\Repositories\Movie\MovieRepositoryInterface'
         );
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Blade::component('components.movie', 'movie');
     }
 }

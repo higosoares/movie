@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Policies\CategoryPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        // 'App\Model' => 'App\Policies\ModelPolicy',
         UserPolicy::class => UserPolicy::class,
     ];
 
@@ -28,9 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Passport::routes();
-        Passport::personalAccessClientId('client-id');
 
         Gate::define('isAdmin', 'App\Policies\UserPolicy@isAdmin');
     }

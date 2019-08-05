@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="1.160658">
+    <testsuite name="Unit" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.404008">
+      <testsuite name="Tests\Unit\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.404008">
+        <testcase name="testBasicTest" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Unit\ExampleTest.php" line="15" assertions="1" time="0.404008"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Feature" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.756650">
+      <testsuite name="Tests\Feature\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.396924">
+        <testcase name="testBasicTest" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\ExampleTest.php" line="15" assertions="1" time="0.396924"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Services\CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\Services\CategoryServiceTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.359726">
+        <testcase name="testExample" class="Tests\Feature\Services\CategoryTest" classname="Tests.Feature.Services.CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\Services\CategoryServiceTest.php" line="16" assertions="1" time="0.359726"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -12,60 +12,19 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
-        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet" type="text/css" media="all"/>
-        @yield('head')
-        <style>
-            .container2{
-                background: url(../img/background.jpg);
-                width: 100%;
-                height: 80%;
-            }
-
-        </style>
-
+        @include('includes.head')
     </head>
     <body>
 
-        <div class="flex-center position-ref full-height">
-            <dic class="top-left">
-                <div class="logo">
-                    <a href="index.html"><h1>Movie<span>Entertainment</span></h1></a>
-                </div>
-            </dic>
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="container container2">
-                @section('content')
-                    {{--<img src="{{ asset('img/background.jpg') }}"/>--}}
-                @show
-            </div>
-        </div>
-        <div class="footer">
-            <div class="container">
-                <div class="col-md-5 grid_left">
-                    <p>© 2018 Movie. All rights reserved</p>
-                </div>
-                <div class="col-md-7 grid_right">
-                    <ul>
-                        <li>
-                            <a href="contact.html">About Us</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-        <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
-        @yield('js-files')
+        @include('includes.header')
+        <main class="py-4">
+            @yield('content')
+        </main>
+        <section>
+            <a href="#" class="to-top">
+                <i class="fas fa-arrow-circle-up"></i>
+            </a>
+        </section>
+        @include('includes.footer')
     </body>
 </html>

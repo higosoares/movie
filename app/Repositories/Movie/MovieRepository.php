@@ -8,8 +8,9 @@
 
 namespace App\Repositories\Movie;
 
-use App\Models\Movie;
 use stdClass;
+use App\Models\Movie;
+use Illuminate\Support\Collection;
 use App\Interfaces\Movie\MovieRepositoryInterface;
 
 class MovieRepository implements MovieRepositoryInterface
@@ -76,9 +77,9 @@ class MovieRepository implements MovieRepositoryInterface
     /**
      * List movie
      * @param stdClass $params
-     * @return array
+     * @return Collection
      */
-    public function list($params=null)
+    public function list($params=null) : Collection
     {
         $query = Movie::query();
         if (isset($params->tp_situation_movie)) {

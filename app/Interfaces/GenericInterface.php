@@ -11,7 +11,6 @@ namespace App\Interfaces;
 
 interface GenericInterface
 {
-    
     public function register($params);
 
     public function edit($id, $params);
@@ -21,5 +20,4 @@ interface GenericInterface
     public function list();
 
     public function retrieve($id);
-
 }

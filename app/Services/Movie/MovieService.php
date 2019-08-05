@@ -14,6 +14,7 @@ use stdClass;
 use App\Validates\Movie\MovieValidate;
 use App\Interfaces\Movie\MovieServiceInterface;
 use App\Interfaces\Movie\MovieRepositoryInterface;
+use Illuminate\Support\Collection;
 
 class MovieService implements MovieServiceInterface
 {
@@ -53,9 +54,9 @@ class MovieService implements MovieServiceInterface
     /**
      * List movies
      * @param \stdClass $params
-     * @return array
+     * @return Collection
      */
-    public function list($params = null)
+    public function list($params = null) : Collection
     {
         return $this->movieRepository->list($params);
     }

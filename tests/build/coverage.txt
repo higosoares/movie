@@ -1,0 +1,22 @@
+
+
+Code Coverage Report:     
+  2019-08-04 18:36:54     
+                          
+ Summary:                 
+  Classes: 10.20% (5/49)  
+  Methods:  6.85% (10/146)
+  Lines:   10.48% (52/496)
+
+\App\Console::App\Console\Kernel
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  4/  4)
+\App\Providers::App\Providers\AppServiceProvider
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% ( 18/ 18)
+\App\Providers::App\Providers\AuthServiceProvider
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  3/  3)
+\App\Providers::App\Providers\EventServiceProvider
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  2/  2)
+\App\Providers::App\Providers\RouteServiceProvider
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 15/ 15)
+\App\Providers::App\Providers\TelescopeServiceProvider
+  Methods:   0.00% ( 0/ 3)   Lines:  52.63% ( 10/ 19)

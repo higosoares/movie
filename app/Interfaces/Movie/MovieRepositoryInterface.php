@@ -15,7 +15,7 @@ interface MovieRepositoryInterface
 
     public function delete(int $id);
 
-    public function list() : Collection;
+    public function list($params=null) : Collection;
 
     public function retrieveById(int $id) : ?Movie;
 
