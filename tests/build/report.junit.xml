@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="1.160658">
-    <testsuite name="Unit" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.404008">
-      <testsuite name="Tests\Unit\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.404008">
-        <testcase name="testBasicTest" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Unit\ExampleTest.php" line="15" assertions="1" time="0.404008"/>
+  <testsuite name="" tests="10" assertions="10" errors="0" failures="0" skipped="0" time="4.032327">
+    <testsuite name="Unit" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.437471">
+      <testsuite name="Tests\Unit\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.437471">
+        <testcase name="testBasicTest" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Unit\ExampleTest.php" line="15" assertions="1" time="0.437471"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Feature" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.756650">
-      <testsuite name="Tests\Feature\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.396924">
-        <testcase name="testBasicTest" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\ExampleTest.php" line="15" assertions="1" time="0.396924"/>
+    <testsuite name="Feature" tests="9" assertions="9" errors="0" failures="0" skipped="0" time="3.594856">
+      <testsuite name="Tests\Feature\CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\CategoryTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.362767">
+        <testcase name="testExample" class="Tests\Feature\CategoryTest" classname="Tests.Feature.CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\CategoryTest.php" line="19" assertions="1" time="0.362767"/>
       </testsuite>
-      <testsuite name="Tests\Feature\Services\CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\Services\CategoryServiceTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.359726">
-        <testcase name="testExample" class="Tests\Feature\Services\CategoryTest" classname="Tests.Feature.Services.CategoryTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\copia\tests\Feature\Services\CategoryServiceTest.php" line="16" assertions="1" time="0.359726"/>
+      <testsuite name="Tests\Feature\Controller\CategoryControllerTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Controller\CategoryControllerTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.296140">
+        <testcase name="testExample" class="Tests\Feature\Controller\CategoryControllerTest" classname="Tests.Feature.Controller.CategoryControllerTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Controller\CategoryControllerTest.php" line="19" assertions="1" time="0.296140"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\MovieControllerTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Controller\MovieControllerTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.289178">
+        <testcase name="testExample" class="Tests\Feature\MovieControllerTest" classname="Tests.Feature.MovieControllerTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Controller\MovieControllerTest.php" line="16" assertions="1" time="0.289178"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.515590">
+        <testcase name="testBasicTest" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\ExampleTest.php" line="15" assertions="1" time="0.515590"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Services\CategoryServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\CategoryServiceTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="1.813710">
+        <testcase name="testExample" class="Tests\Feature\Services\CategoryServiceTest" classname="Tests.Feature.Services.CategoryServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\CategoryServiceTest.php" line="36" assertions="1" time="0.482817"/>
+        <testcase name="testModel" class="Tests\Feature\Services\CategoryServiceTest" classname="Tests.Feature.Services.CategoryServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\CategoryServiceTest.php" line="43" assertions="1" time="0.440292"/>
+        <testcase name="testRetrieveByIdWithIdNotFound" class="Tests\Feature\Services\CategoryServiceTest" classname="Tests.Feature.Services.CategoryServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\CategoryServiceTest.php" line="50" assertions="1" time="0.486535"/>
+        <testcase name="testRegister" class="Tests\Feature\Services\CategoryServiceTest" classname="Tests.Feature.Services.CategoryServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\CategoryServiceTest.php" line="63" assertions="1" time="0.404066"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Services\MovieServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\MovieServiceTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.317471">
+        <testcase name="testExample" class="Tests\Feature\Services\MovieServiceTest" classname="Tests.Feature.Services.MovieServiceTest" file="C:\Higo\Desenvolvimento\Web\PHP\Laravel\movie\tests\Feature\Services\MovieServiceTest.php" line="16" assertions="1" time="0.317471"/>
       </testsuite>
     </testsuite>
   </testsuite>

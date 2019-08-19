@@ -10,28 +10,25 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
-mix.scripts([//'public/js/all.min.js',
+/*
+mix.js('resources/js/app.js', 'public/js')
+.scripts(['public/js/all.min.js',
     'public/js/jquery-3.4.1.min.js',
     'public/js/app.js',
     'public/js/style.js',
 ], 'public/js/appMix.js')
-    .sourceMaps()
-    .version();
-
-mix.styles([
-    //'public/css/all.min.css',
+.styles(['public/css/all.min.css',
     'public/css/app.css',
     'public/css/style.css'
 ], 'public/css/appMix.css')
-    .sourceMaps()
-    .version();
+.scripts(['public/js/sweetalert2.all.min.js',
+'public/js/jquery.validate.js.js',
+'public/js/mensagem/mensagem.js',
+'public/js/datatables.min.js'
+], 'public/js/forms.js')
+.sourceMaps()
+.version(); */
 
-mix.scripts(['public/js/sweetalert2.all.min.js',
-    'public/js/jquery.validate.js.js',
-    'public/js/mensagem/mensagem.js',
-    'public/js/datatables.min.js'
-], 'public/js/forms.js');
 
 
 //    'public/css/datatable.min.css'
