@@ -14,29 +14,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
+        $this->app->singleton(
             'App\Interfaces\Category\CategoryServiceInterface',
             'App\Services\Category\CategoryService'
         );
 
-        $this->app->bind(
+        $this->app->singleton(
             'App\Interfaces\Category\CategoryRepositoryInterface',
             'App\Repositories\Category\CategoryRepository'
         );
 
-        $this->app->bind(
-            'App\Interfaces\Movie\MovieInterface',
-            'App\Services\Movie\MovieService'
-        );
-
-        $this->app->bind(
+        $this->app->singleton(
             'App\Interfaces\Movie\MovieServiceInterface',
             'App\Services\Movie\MovieService'
         );
 
-        $this->app->bind(
-            'App\Interfaces\Movie\MovieServiceInterface',
-            'App\Repositories\Movie\MovieRepositoryInterface'
+        $this->app->singleton(
+            'App\Interfaces\Movie\MovieRepositoryInterface',
+            'App\Repositories\Movie\MovieRepository'
         );
     }
 

@@ -11,6 +11,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class CheckRole
@@ -24,7 +25,7 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        if (Gate::check('isAdmin', $request->user())) {
+        if (Gate::check('isAdmin', Auth::user())) {
             return $next($request);
         }
 

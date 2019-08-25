@@ -58,7 +58,7 @@ class MovieService implements MovieServiceInterface
      */
     public function list($params = null) : Collection
     {
-        return $this->movieRepository->list($params);
+        return $this->movieRepositoryInterface->list($params);
     }
 
     /**

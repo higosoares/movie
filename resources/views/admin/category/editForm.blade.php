@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <form id="edit_category" name="edit_category" method="PUT"
                     action="{{ route('admin.category.edit', ['id' => $category->id_category ]) }}">
-                    @csrf
+                        @csrf
                         <div class="form-group">
                             <label for="tx_name_category">Name</label>
                             <input type="text" class="form-control" id="tx_name_category"

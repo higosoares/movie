@@ -1,7 +1,14 @@
 var category = {
 
     register: function(url, params) {
-        $.post(url, params, function(retorno) {
+        $.ajax({
+            url:url,
+            type: 'POST',
+            dataType: 'json',
+            data: params,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         }).done(function (response) {
             mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao cadastrar a categoria.', 2000);
         }).fail(function(response) {
@@ -16,7 +23,7 @@ var category = {
             dataType: 'json',
             data: params,
             headers: {
-                'X-CSRF-Token': $('input[name=_token]').val()
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         }).done(function(response) {
             mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao editar a categoria.', 2000);
@@ -41,7 +48,7 @@ var category = {
                     type: 'DELETE',
                     dataType: 'json',
                     headers: {
-                        'X-CSRF-Token': $('input[name=_token]').val()
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 }).done(function(response) {
                     mensagem.mensagemComRefresh('success', 'Sucesso','Sucesso ao excluir a categoria.', 2000);

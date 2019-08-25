@@ -26,12 +26,12 @@
                 <div class="container">
                     <div class="browse-inner">
                         <div class="col-md-12">
-                            <a class="btn btn-primary" href="{{ route('category/index') }}">
+                            <a class="btn btn-primary" href="{{ route('admin/category/index') }}">
                                 Voltar
                             </a>
                         </div>
                         <div class="col-md-12">
-                            <form id="register_category" name="register_category" method="POST" action="{{ route('category.register') }}">
+                            <form id="register_category" name="register_category" method="POST" action="{{ route('admin.category.register') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="tx_name_category">Name</label>
