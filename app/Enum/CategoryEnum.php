@@ -21,4 +21,8 @@ class CategoryEnum
     const idInvalid = 'Id invalid in category';
     const created = 'Category created';
     const updated = 'Category updated';
+    const deleted = 'Category deleted';
+    const notCreated = 'Category not created';
+    const notUpdated = 'Category not updated';
+    const notDeleted = 'Category not deleted';
 }

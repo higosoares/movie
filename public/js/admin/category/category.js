@@ -42,7 +42,7 @@ var category = {
                 confirmButtonText: "Sim, excluir!",
                 cancelButtonText: "Cancelar",
         }).then((value) => {
-            if (value.value == true) {
+            if (value.value === true) {
                 $.ajax({
                     url:$(event).attr('data-url'),
                     type: 'DELETE',

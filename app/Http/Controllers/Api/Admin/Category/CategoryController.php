@@ -8,7 +8,10 @@
 
 namespace App\Http\Controllers\Api\Admin\Category;
 
-use Exception;
+use App\Enum\CategoryEnum;
+use App\Http\Resource\GenericResource;
+use App\Traits\LancadorDeExcecao;
+use App\Traits\RequestResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Exceptions\MovieException;
@@ -18,18 +21,22 @@ use App\Interfaces\Category\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
+    use LancadorDeExcecao;
+    use RequestResponse;
+
     protected $categoryInterface;
 
     public function __construct(CategoryServiceInterface $categoryInterface)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->categoryInterface = $categoryInterface;
     }
 
     /**
      * Register new category
      * @param Request $request
-     * @return Response
+     * @return GenericResource|void
+     * @throws MovieException
      */
     public function register(Request $request)
     {
@@ -39,26 +46,21 @@ class CategoryController extends Controller
             $params->tx_name_category = $request->input('tx_name_category');
 
             $category = $this->categoryInterface->register($params);
-            $retorno = [
-                'status' => 201,
-                'resultado' => $category
-            ];
             DB::commit();
-        } catch(MovieException $e) {
+            return new GenericResource($this->response(201, $category));
+        } catch(MovieException $exception) {
             DB::rollback();
-            $retorno = [
-                'status' => $e->getCode(),
-                'resultado' => $e->retorno
-            ];
+            $this->excecao($exception->getMessage(), CategoryEnum::notCreated, $exception->getCode());
         }
-        return response()->json($retorno)->setStatusCode($retorno['status']);
     }
 
     /**
      * Edit category
+     *
      * @param int $id
      * @param Request $request
-     * @return Response
+     * @return GenericResource|void
+     * @throws MovieException
      */
     public function edit($id, Request $request)
     {
@@ -66,44 +68,32 @@ class CategoryController extends Controller
         try {
             $params = new \stdClass();
             $params->tx_name_category = $request->input('tx_name_category');
+            dd($params);
 
             $category = $this->categoryInterface->edit($id, $params);
-            $retorno = [
-                'status' => 200,
-                'resultado' => $category
-            ];
             DB::commit();
-        } catch(MovieException $e) {
+            return new GenericResource($this->response(200, $category));
+        } catch(MovieException $exception) {
             DB::rollback();
-            $retorno = [
-                'status' => $e->getCode(),
-                'resultado' => $e->retorno
-            ];
+            $this->excecao($exception->getMessage(), CategoryEnum::notUpdated, $exception->getCode());
         }
-        return response()->json($retorno)->setStatusCode($retorno['status']);
-
     }
 
     /**
      * Delete category
+     *
+     * @param Request $request
      * @param $id
-     * @return Response
+     * @return GenericResource|void
+     * @throws MovieException
      */
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
         try {
-            dd($id);
             $this->categoryInterface->delete((int)$id);
-            $retorno = [
-                'status' => 203
-            ];
-        } catch (MovieException $e) {
-            $retorno = [
-                'status' => $e->getCode(),
-                'resultado' => $e->retorno
-            ];
+            return new GenericResource($this->response(203, ''));
+        } catch (MovieException $exception) {
+            $this->excecao($exception->getMessage(), CategoryEnum::notCreated, $exception->getCode());
         }
-        return response()->json($retorno)->setStatusCode($retorno['status']);
     }
-
 }
