@@ -6,29 +6,30 @@
  * Time: 17:45
  */
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Web\Admin\User;
 
 use App\Exceptions\MovieException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\ProfileRequest;
-use App\Models\Profile;
-use App\Services\Profile\ProfileService;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
+use App\Services\User\UserService;
+use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
      *
-     * @var ProfileService
+     * @var UserService
      */
-    protected $profileService;
+    protected $userService;
 
-    public function __construct(ProfileService $profileService)
+    public function __construct(UserService $userService)
     {
         $this->middleware('auth');
-        $this->profileService = $profileService;
+        $this->userService = $userService;
 
     }
 
@@ -36,11 +37,10 @@ class ProfileController extends Controller
      * Show index page
      * @return \Illuminate\View\View
     */
-
     public function index()
     {
-        $profiles = $this->profileService->list();
-        return response()->json($profiles);
+        $users = $this->userService->list();
+        return response()->json($users);
 
     }
 
@@ -50,11 +50,11 @@ class ProfileController extends Controller
      */
     public function registerForm()
     {
-        return view('profile.registerForm');
+        return view('user.registerForm');
     }
 
     /**
-     * Register new profile
+     * Register new user
      * @param Request $request
      * @return Response
      */
@@ -63,12 +63,14 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_profile = $request->input('tx_name_profile');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
-            $profile = $this->profileService->register($params);
+            $user = $this->userService->register($params);
             $retorno = [
                 'status' => 201,
-                'resultado' => $profile
+                'resultado' => $user
             ];
             DB::commit();
         } catch(MovieException $e) {
@@ -88,30 +90,32 @@ class ProfileController extends Controller
      */
     public function editForm($id)
     {
-        $profile = $this->profileService->retrieveById((int) $id);
+        $user = $this->userService->retrieveById((int) $id);
 
-        return view('profile.editForm')->with([
-            'profile' => $profile,
+        return view('user.editForm')->with([
+            'user' => $user,
         ]);
     }
 
     /**
-     * Edit profile
+     * Edit user
      * @param int $id
-     * @param ProfileRequest $request
+     * @param UserRequest $request
      * @return Response
      */
-    public function edit($id, ProfileRequest $request)
+    public function edit($id, UserRequest $request)
     {
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_profile = $request->input('tx_name_profile');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
-            $profile = $this->profileService->edit($id, $params);
+            $user = $this->userService->edit($id, $params);
             $retorno = [
                 'status' => 200,
-                'resultado' => $profile
+                'resultado' => $user
             ];
             DB::commit();
         } catch(MovieException $e) {
@@ -125,14 +129,14 @@ class ProfileController extends Controller
     }
 
     /**
-     * Delete profile
+     * Delete user
      * @param $id
      * @return Response
      */
     public function delete($id)
     {
         try {
-            $this->profileService->delete((int) $id);
+            $this->userService->delete((int) $id);
             $retorno = [
                 'status' => 203
             ];

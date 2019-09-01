@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Category;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,24 +10,24 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CategoryEvent
+class ErroEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $category;
-    public $message;
+    public $status;
+    public $messageLog;
 
     /**
      * Create a new event instance.
      *
-     * @param Category $category
-     * @param string $message
+     * @param int $status
+     * @param string $messageLog
      * @return void
      */
-    public function __construct(Category $category, string $message)
+    public function __construct(int $status, string $messageLog)
     {
-        $this->category = $category;
-        $this->message = $message;
+        $this->status = $status;
+        $this->messageLog = $messageLog;
     }
 
     /**

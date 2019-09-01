@@ -8,6 +8,7 @@
 
 namespace App\Services\Category;
 
+use App\Exceptions\MovieException;
 use stdClass;
 use App\Models\Category;
 use App\Traits\LancadorDeExcecao;
@@ -23,8 +24,7 @@ class CategoryService implements CategoryServiceInterface
     protected $categoryValidate;
     protected $categoryRepositoryInterface;
 
-    public function __construct(CategoryValidate $categoryValidate,
-    CategoryRepositoryInterface $categoryRepositoryInterface)
+    public function __construct(CategoryValidate $categoryValidate, CategoryRepositoryInterface $categoryRepositoryInterface)
     {
         $this->categoryValidate = $categoryValidate;
         $this->categoryRepositoryInterface = $categoryRepositoryInterface;
@@ -32,56 +32,62 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * Register new category
+     *
      * @param stdClass $params
      * @return Category
+     * @throws MovieException
      */
     public function register(stdClass $params) : Category
     {
         $this->categoryValidate->validateParameters($params);
-        $category = $this->categoryRepositoryInterface->register($params);
-        return $category;
+        return $this->categoryRepositoryInterface->register($params);
     }
 
 
     /**
      * List categories
-     * @param stdClass $params
+     *
      * @return Collection
      */
-    public function list($params = null) : Collection
+    public function list() : Collection
     {
-        return $this->categoryRepositoryInterface->list($params);
+        return $this->categoryRepositoryInterface->list();
     }
 
     /**
      * Edit category
+     *
      * @param int $id
      * @param stdClass $params
      * @return Category
+     * @throws MovieException
      */
     public function edit(int $id, stdClass $params) : Category
     {
         $this->categoryValidate->validateParameters($params);
-        $category = $this->retrieveById((int) $id);
-        $category = $this->categoryRepositoryInterface->edit($category->id_category, $params);
-        return $category;
+        $category = $this->retrieveById($id);
+        return $this->categoryRepositoryInterface->edit($category->id_category, $params);
     }
 
     /**
      * Delete category
+     *
      * @param integer $id
+     * @throws MovieException
      */
     public function delete(int $id)
     {
-        $category = $this->categoryRepository->retrieveById($id);
+        $category = $this->categoryRepositoryInterface->retrieveById($id);
         $this->categoryValidate->validateInteger($id);
         $this->categoryRepositoryInterface->delete($category->id_category);
     }
 
     /**
      * Retrieve category by id
+     *
      * @param int $id
      * @return Category
+     * @throws MovieException
      */
     public function retrieveById(int $id): ?Category
     {

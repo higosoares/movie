@@ -55,23 +55,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show edit form
-     * @return \Illuminate\View\View
-     */
-    public function editForm($id)
-    {
-        try {
-            $category = $this->categoryInterface->retrieveById((int) $id);
-
-            return view('admin.category.editForm')->with([
-                'category' => $category,
-            ]);
-        } catch (MovieException $e) {
-            abort(404);
-        }
-    }
-
-    /**
      * Edit category
      * @param int $id
      * @param Request $request

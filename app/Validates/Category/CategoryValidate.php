@@ -7,7 +7,12 @@
  */
 
 namespace App\Validates\Category;
+use App\Enum\CategoryEnum;
+use App\Exceptions\MovieException;
+use App\Models\Category;
 use App\Traits\LancadorDeExcecao;
+use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class CategoryValidate
 {
@@ -30,31 +35,42 @@ class CategoryValidate
 
     /**
      * Validate params
-     * @param \stdClass $params
-     * @throws \DomainException
+     *
+     * @param stdClass $params
+     * @throws MovieException
      */
     public function validateParameters($params)
     {
-        $validator = \Validator::make((array) $params, self::rules(), self::messages());
+        $validator = Validator::make((array) $params, self::rules(), self::messages());
 
-        if ($validator->fails())
-        {
-            $this->excecao($validator->failed());
+        if ($validator->fails()) {
+            $this->excecao('Error', json_encode($validator->failed()));
         }
     }
 
-
+    /**
+     * Validate an integer
+     *
+     * @param $id
+     * @throws MovieException
+     */
     public function validateInteger($id)
     {
         if (!is_int($id)) {
-            $this->excecao(['id' => ['invalid' => 'Id invalid']]);
+            $this->excecao('Error', CategoryEnum::idInvalid);
         }
     }
 
-    public function validateCategory($category)
+    /**
+     * Validate category
+     *
+     * @param Category $category
+     * @throws MovieException
+     */
+    public function validateCategory(?Category $category)
     {
         if (!$category) {
-            $this->excecao(['category' => ['found' => 'Category not found']]);
+            $this->excecao('Error', CategoryEnum::notFound);
         }
     }
 }

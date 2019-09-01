@@ -8,76 +8,81 @@
 
 namespace App\Http\Controllers\Web\Admin\Category;
 
-use Exception;
+use App\Enum\CategoryEnum;
+use App\Traits\LancadorDeExcecao;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Exceptions\MovieException;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Category\CategoryServiceInterface;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    protected $categoryInterface;
+    use LancadorDeExcecao;
 
-    public function __construct(CategoryServiceInterface $categoryInterface)
+    protected $categoryServiceInterface;
+
+    public function __construct(CategoryServiceInterface $categoryServiceInterface)
     {
         $this->middleware('auth');
-        $this->categoryInterface = $categoryInterface;
+        $this->categoryServiceInterface = $categoryServiceInterface;
     }
 
     /**
      * Show index page
-     * @return \Illuminate\View\View
+     *
+     * @return View
      */
     public function index()
     {
-        try {
-            $categories = $this->categoryInterface->list();
+        $categories = $this->categoryServiceInterface->list();
 
-            return view('admin.category.index')->with(['categories' => $categories]);
-        } catch (MovieException $e) {
-            abort(404);
-        }
+        return view(CategoryEnum::viewIndex)->with(['categories' => $categories]);
     }
 
     /**
      * Show category page
-     * @return \Illuminate\View\View
+     *
+     * @param Request $request
+     * @param $id
+     * @return View|void
+     * @throws MovieException
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         try {
-            $category = $this->categoryInterface->retrieveById($id);
-            return view('admin.category.show')->with(['category' => $category]);
-        } catch (MovieException $e) {
-            abort(404);
+            $category = $this->categoryServiceInterface->retrieveById($id);
+            return view(CategoryEnum::viewShow)->with(['category' => $category]);
+        } catch (MovieException $exception) {
+            $this->excecao($exception->getMessage(), CategoryEnum::notFound, $exception->getCode());
         }
     }
 
     /**
      * Show register form
-     * @return \Illuminate\View\View
+     *
+     * @return View
      */
     public function registerForm()
     {
-        return view('admin.category.registerForm');
+        return view(CategoryEnum::viewRegisterForm);
     }
 
     /**
      * Show edit form
-     * @return \Illuminate\View\View
+     *
+     * @param Request $request
+     * @param $id
+     * @return View|void
+     * @throws MovieException
      */
-    public function editForm($id)
+    public function editForm(Request $request, $id)
     {
         try {
-            $category = $this->categoryInterface->retrieveById((int) $id);
-
-            return view('admin.category.editForm')->with([
-                'category' => $category,
-            ]);
-        } catch (MovieException $e) {
-            abort(404);
+            $category = $this->categoryServiceInterface->retrieveById((int) $id);
+            return view(CategoryEnum::viewEditForm)->with(['category' => $category,]);
+        } catch (MovieException $exception) {
+            $this->excecao($exception->getMessage(), CategoryEnum::notFound, $exception->getCode());
         }
     }
 }

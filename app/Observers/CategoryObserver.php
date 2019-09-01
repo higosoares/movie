@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enum\CategoryEnum;
 use App\Models\Category;
 use App\Events\CategoryEvent;
 
@@ -15,10 +16,10 @@ class CategoryObserver
      */
     public function created(Category $category)
     {
-        //
+        event(new CategoryEvent($category, CategoryEnum::created));
     }
 
-        /**
+    /**
      * Handle the category "created" event.
      *
      * @param  Category  $category
@@ -26,6 +27,7 @@ class CategoryObserver
      */
     public function saving(Category $category)
     {
+        //
     }
 
     /**
@@ -37,7 +39,7 @@ class CategoryObserver
     public function updated(Category $category)
     {
         // Dispatching Event
-        event(new CategoryEvent($category, 'updated', 'A categoria foi atualizada'));
+        event(new CategoryEvent($category, CategoryEnum::updated));
     }
 
     /**

@@ -8,10 +8,17 @@
 
 namespace App\Validates\Movie;
 
-use Exception;
+use App\Enum\MovieEnum;
+use App\Exceptions\MovieException;
+use App\Models\Movie;
+use App\Traits\LancadorDeExcecao;
+use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class MovieValidate
 {
+    use LancadorDeExcecao;
+
     public static function rules()
     {
         return [
@@ -37,31 +44,43 @@ class MovieValidate
 
     /**
      * Validate params
-     * @param \stdClass $params
-     * @throws \DomainException
+     *
+     * @param stdClass $params
+     * @throws MovieException
      */
     public function validateParameters($params)
     {
-        $validator = \Validator::make((array) $params, self::rules(), self::messages());
+        $validator = Validator::make((array) $params, self::rules(), self::messages());
 
-        if ($validator->fails())
-        {
-            throw new Exception($validator->failed());
+        if ($validator->fails()) {
+            $this->excecao('Error', json_encode($validator->failed()));
         }
     }
 
 
+    /**
+     * Validate an integer
+     *
+     * @param $id
+     * @throws MovieException
+     */
     public function validateInteger($id)
     {
         if (!is_int($id)) {
-            throw new Exception('Id invalid');
+            $this->excecao('Error', MovieEnum::idInvalid);
         }
     }
 
-    public function validateMovie($movie)
+    /**
+     * Validate movie
+     *
+     * @param Movie $movie
+     * @throws MovieException
+     */
+    public function validateMovie(?Movie $movie)
     {
         if (!$movie) {
-            throw new Exception('Movie not found');
+            $this->excecao('Error', MovieEnum::notFound);
         }
     }
 }

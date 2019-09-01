@@ -11,11 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeed::class);
-        $this->call(MovieSeed::class);
-        $this->call(CategorySeed::class);
-        $this->call(MovieCategorySeed::class);
-        $this->call(ProfileSeed::class);
-        $this->call(UserProfileSeed::class);
+        $this->call([
+            UserSeed::class,
+            MovieSeed::class,
+            CategorySeed::class,
+            MovieCategorySeed::class,
+            ProfileSeed::class,
+            UserProfileSeed::class
+        ]);
     }
 }

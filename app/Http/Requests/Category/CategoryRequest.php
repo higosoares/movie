@@ -31,11 +31,11 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return \App\Validates\Category\CategoryValidate::rule();
+        return \App\Validates\Category\CategoryValidate::rules();
     }
 
     public function messages()
     {
-        return \App\Validates\Category\CategoryValidate::rule();
+        return \App\Validates\Category\CategoryValidate::messages();
     }
 }

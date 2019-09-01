@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Movie;
+use App\Observers\CategoryObserver;
+use App\Observers\MovieObserver;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,5 +47,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::component('components.movie', 'movie');
+
+        Category::observe(CategoryObserver::class);
+        Movie::observe(MovieObserver::class);
     }
 }

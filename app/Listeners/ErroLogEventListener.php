@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\CategoryEvent;
+use App\Events\ErroEvent;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CategoryLogEventListener
+class ErroLogEventListener
 {
     /**
      * Create the event listener.
@@ -21,11 +21,11 @@ class CategoryLogEventListener
     /**
      * Handle the event.
      *
-     * @param  CategoryEvent $event
+     * @param  ErroEvent $event
      * @return void
      */
-    public function handle(CategoryEvent $event)
+    public function handle(ErroEvent $event)
     {
-        Log::channel('category')->info($event->message.':'.json_encode($event->category));
+        Log::channel('erro')->info($event->messageLog);
     }
 }

@@ -46,6 +46,18 @@ return [
             'level' => 'debug',
         ],
 
+        'category' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/Category.log'),
+            'level' => 'debug',
+        ],
+
+        'erro' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/Erro.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

@@ -9,14 +9,17 @@
 
 namespace App\Http\Middleware;
 
+use App\Enum\ExceptionEnum;
+use App\Traits\RequestResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class CheckRole
+class CheckRoleApi
 {
+    use RequestResponse;
     /**
      * Checks if user has admin permission
      *
@@ -26,10 +29,10 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
+        dd($request, Auth::user());
         if (Gate::check('isAdmin', Auth::user())) {
             return $next($request);
         }
-        return redirect('/home')->with('error', 'Your are not allowed to this page.');
+        return response()->json($this->response(403, ExceptionEnum::response403), 403);
     }
-
 }

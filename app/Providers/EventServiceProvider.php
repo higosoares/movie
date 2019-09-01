@@ -21,6 +21,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CategoryEvent' => [
             'App\Listeners\CategoryLogEventListener',
         ],
+        'App\Events\MovieEvent' => [
+            'App\Listeners\MovieLogEventListener',
+        ],
+        'App\Events\ErroEvent' => [
+            'App\Listeners\ErroLogEventListener',
+        ],
     ];
 
     /**

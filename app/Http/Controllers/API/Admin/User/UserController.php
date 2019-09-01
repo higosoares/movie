@@ -3,56 +3,45 @@
  * Created by PhpStorm.
  * User: HIGO
  * Date: 18/09/2018
- * Time: 17:44
+ * Time: 17:45
  */
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Api\Admin\User;
 
-use Exception;
+use App\Exceptions\MovieException;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
+use App\Services\User\UserService;
+use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Exceptions\MovieException;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Interfaces\Category\CategoryServiceInterface;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
-    protected $categoryInterface;
+    /**
+     *
+     * @var UserService
+     */
+    protected $userService;
 
-    public function __construct(CategoryServiceInterface $categoryInterface)
+    public function __construct(UserService $userService)
     {
         $this->middleware('auth');
-        $this->categoryInterface = $categoryInterface;
+        $this->userService = $userService;
+
     }
 
     /**
      * Show index page
      * @return \Illuminate\View\View
-     */
+    */
     public function index()
     {
-        try {
-            $categories = $this->categoryInterface->list();
+        $users = $this->userService->list();
+        return response()->json($users);
 
-            return view('category.index')->with(['categories' => $categories]);
-        } catch (MovieException $e) {
-            abort(404);
-        }
-    }
-
-    /**
-     * Show category page
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        try {
-            $category = $this->categoryInterface->retrieveById($id);
-            return view('category.show')->with(['category' => $category]);
-        } catch (MovieException $e) {
-            abort(404);
-        }
     }
 
     /**
@@ -61,11 +50,11 @@ class CategoryController extends Controller
      */
     public function registerForm()
     {
-        return view('category.registerForm');
+        return view('user.registerForm');
     }
 
     /**
-     * Register new category
+     * Register new user
      * @param Request $request
      * @return Response
      */
@@ -74,12 +63,14 @@ class CategoryController extends Controller
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_category = $request->input('tx_name_category');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
-            $category = $this->categoryInterface->register($params);
+            $user = $this->userService->register($params);
             $retorno = [
                 'status' => 201,
-                'resultado' => $category
+                'resultado' => $user
             ];
             DB::commit();
         } catch(MovieException $e) {
@@ -94,38 +85,37 @@ class CategoryController extends Controller
 
     /**
      * Show edit form
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function editForm($id)
     {
-        try {
-            $category = $this->categoryInterface->retrieveById((int) $id);
+        $user = $this->userService->retrieveById((int) $id);
 
-            return view('category.editForm')->with([
-                'category' => $category,
-            ]);
-        } catch (MovieException $e) {
-            abort(404);
-        }
+        return view('user.editForm')->with([
+            'user' => $user,
+        ]);
     }
 
     /**
-     * Edit category
+     * Edit user
      * @param int $id
-     * @param Request $request
+     * @param UserRequest $request
      * @return Response
      */
-    public function edit($id, Request $request)
+    public function edit($id, UserRequest $request)
     {
         DB::beginTransaction();
         try {
             $params = new \stdClass();
-            $params->tx_name_category = $request->input('tx_name_category');
+            $params->name = $request->input('name');
+            $params->email = $request->input('email');
+            $params->password = $request->input('password');
 
-            $category = $this->categoryInterface->edit($id, $params);
+            $user = $this->userService->edit($id, $params);
             $retorno = [
                 'status' => 200,
-                'resultado' => $category
+                'resultado' => $user
             ];
             DB::commit();
         } catch(MovieException $e) {
@@ -136,23 +126,21 @@ class CategoryController extends Controller
             ];
         }
         return response()->json($retorno)->setStatusCode($retorno['status']);
-
     }
 
     /**
-     * Delete category
+     * Delete user
      * @param $id
      * @return Response
      */
     public function delete($id)
     {
         try {
-            dd($id);
-            $this->categoryInterface->delete((int)$id);
+            $this->userService->delete((int) $id);
             $retorno = [
                 'status' => 203
             ];
-        } catch (MovieException $e) {
+        } catch(MovieException $e) {
             $retorno = [
                 'status' => $e->getCode(),
                 'resultado' => $e->retorno

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['middleware' => 'checkRole', 'prefix' => 'admin'], function() {
+Route::group(['middleware' => 'checkRoleApi', 'prefix' => 'admin'], function() {
     Route::group(['prefix' => 'user'], function() {
         Route::post('/', 'Api\Admin\User\UserController@register')->name('admin.user.register');
         Route::put('/{id}', 'Api\Admin\User\UserController@edit')->name('admin.user.edit');

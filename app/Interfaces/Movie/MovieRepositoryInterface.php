@@ -8,15 +8,13 @@ use Illuminate\Support\Collection;
 
 interface MovieRepositoryInterface
 {
-
     public function register(stdClass $params) : Movie;
 
     public function edit(int $id, stdClass $params) : Movie;
 
     public function delete(int $id);
 
-    public function list($params=null) : Collection;
+    public function list(stdClass $params=null) : Collection;
 
     public function retrieveById(int $id) : ?Movie;
-
 }

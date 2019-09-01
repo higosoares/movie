@@ -67,6 +67,10 @@ class MovieRepository implements MovieRepositoryInterface
 
     /**
      * Delete movie
+     *
+     * @param int $id
+     * @return bool
+     * @throws \Exception
      */
     public function delete(int $id)
     {
@@ -76,10 +80,11 @@ class MovieRepository implements MovieRepositoryInterface
 
     /**
      * List movie
+     *
      * @param stdClass $params
      * @return Collection
      */
-    public function list($params=null) : Collection
+    public function list(stdClass $params=null) : Collection
     {
         $query = Movie::query();
         if (isset($params->tp_situation_movie)) {
@@ -98,6 +103,7 @@ class MovieRepository implements MovieRepositoryInterface
 
     /**
      * Retrieve movie
+     *
      * @param int $id
      * @return Movie
      */

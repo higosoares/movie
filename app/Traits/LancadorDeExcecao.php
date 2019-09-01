@@ -2,23 +2,22 @@
 
 namespace App\Traits;
 
+use App\Events\ErroEvent;
 use App\Exceptions\MovieException;
 
 trait LancadorDeExcecao
 {
     /**
-     * Lancar excecao
-     * @param array ['campo' => ['tipoErro' => 'Mensagem']]
-     * @param type $status
-     * @throws \DomainException
+     * Lanca excecao
+     *
+     * @param int $status
+     * @param string $message
+     * @param string $messageLog
+     * @throws MovieException
      */
-    public function excecao($params, $status=412)
+    public function excecao(string $message, string $messageLog, int $status=400)
     {
-        $movieException = new MovieException('Falha ao realizar operação', $status);
-        $movieException->retorno = json_encode([
-            'mensagem'   => 'Erro de validação',
-            'erro'    => $params
-        ]);
-        throw $movieException;
+        event(new ErroEvent($status, $messageLog));
+        throw new MovieException($message, $status);
     }
 }

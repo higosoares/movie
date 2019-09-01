@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Category;
+use App\Models\Movie;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,23 +11,23 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CategoryEvent
+class MovieEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $category;
+    public $movie;
     public $message;
 
     /**
      * Create a new event instance.
      *
-     * @param Category $category
+     * @param Movie $movie
      * @param string $message
      * @return void
      */
-    public function __construct(Category $category, string $message)
+    public function __construct(Movie $movie, string $message)
     {
-        $this->category = $category;
+        $this->movie = $movie;
         $this->message = $message;
     }
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 interface CategoryRepositoryInterface
 {
-
     public function register(stdClass $params) : Category;
 
     public function edit(int $id, stdClass $params) : Category;
@@ -18,5 +17,4 @@ interface CategoryRepositoryInterface
     public function list() : Collection;
 
     public function retrieveById(int $id) : ?Category;
-
 }
